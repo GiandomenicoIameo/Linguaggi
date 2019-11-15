@@ -33,8 +33,6 @@ int main( void )
     puts( "Stringa decriptata" );
    __decrypt( dst, len, chiave );
     
-    
-
     return 0;
 }
 
