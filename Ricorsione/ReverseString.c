@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <limits.h>
 
 void stringReverse( const char* array );
 
