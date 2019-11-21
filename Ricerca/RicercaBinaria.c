@@ -4,7 +4,6 @@
 
 int main( void )
 {
- int a;
  int array[ SIZE ];
  size_t count, posizione;
  int trovato;
