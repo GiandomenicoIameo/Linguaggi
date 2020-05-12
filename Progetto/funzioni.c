@@ -4,7 +4,6 @@
 #include <unistd.h>
 #include "funzioni.h"
 
-
 void prelevazioneLibri( Biblioteca_SL** Testa, Studente_SL** TestaStudente ) {
 
   int libroElenco, libroBiblioteca;
