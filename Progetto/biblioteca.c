@@ -22,19 +22,19 @@ int main( void ) {
     switch( choice ) {
       case 1 :
           prelevazioneLibri( &Testa, &TestaStudente );
-      break;
+          break;
       
       case 2 :
           restituzioneLibri( &Testa, &TestaStudente );
-      break;
+          break;
 
       case 3 :
           stampaLibri( &Testa );
-      break;
+          break;
 
       default :
           puts( "Scelta non valida" );
-      break;
+          break;
     }
     printf( "%s", "Inserisci opzione -->  " );
     scanf( "%d", &choice );
