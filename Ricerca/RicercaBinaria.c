@@ -2,8 +2,8 @@
 
 #define SIZE 10
 
-int main( void )
-{
+int main( void ) {
+ 
  int array[ SIZE ];
  size_t count, posizione;
  int trovato;
