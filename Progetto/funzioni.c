@@ -60,7 +60,7 @@ void restituzioneLibri( Biblioteca_SL** Testa, Studente_SL** TestaStudente ) {
   free( nomeDelLibro );
 }
 
-void buffer( void ) {
+static void buffer( void ) {
 
   while( getchar() != '\n' );
 }
@@ -75,7 +75,7 @@ void instructions( void ) {
       "4 per terminare il programma\n" );
 }
 
-void inputUtente( char** libro, int* matricola ) {
+static void inputUtente( char** libro, int* matricola ) {
 
   printf( "Inserire matricola di riconoscimento : " );
   scanf( "%d", matricola );
@@ -88,7 +88,7 @@ void inputUtente( char** libro, int* matricola ) {
 
 }
 
-void AggiungiLibroStudente( int matricola, char* libro, Studente_SL** TestaStudente ) {
+static void AggiungiLibroStudente( int matricola, char* libro, Studente_SL** TestaStudente ) {
 
   Studente_SL* tempStudente = *TestaStudente;
   Studente_SL* nodoMatricola = ricercaNodoMatricola( TestaStudente, matricola );
@@ -101,13 +101,13 @@ void AggiungiLibroStudente( int matricola, char* libro, Studente_SL** TestaStude
   nodoMatricola->numeroLibriPrelevati++;
 }
 
-void rimuoviLibroStudente( int matricola, char* libro, Studente_SL* TestaStudente, int indice ) {
+static void rimuoviLibroStudente( int matricola, char* libro, Studente_SL* TestaStudente, int indice ) {
 
   TestaStudente->libroPrelevato[ indice ] = " ";
   TestaStudente->numeroLibriPrelevati--;
 }
 
-void aggiungiMatricola( int matricola, Studente_SL** TestaStudente ) {
+static void aggiungiMatricola( int matricola, Studente_SL** TestaStudente ) {
 
   Studente_SL* temp = *TestaStudente;
 
@@ -119,7 +119,7 @@ void aggiungiMatricola( int matricola, Studente_SL** TestaStudente ) {
   }
 }
 
-void stampaLibri( Biblioteca_SL** Testa ) {
+static void stampaLibri( Biblioteca_SL** Testa ) {
 
   Biblioteca_SL* temp = *Testa;
 
@@ -129,7 +129,7 @@ void stampaLibri( Biblioteca_SL** Testa ) {
   }
 }
 
-Biblioteca_SL* creaNodo( char* titolo ) {
+static Biblioteca_SL* creaNodo( char* titolo ) {
 
   Biblioteca_SL* nuovoPtr = ( Biblioteca_SL* )malloc( sizeof( Biblioteca_SL ) );
   strcpy( nuovoPtr->titoloLibro, titolo );
@@ -138,7 +138,7 @@ Biblioteca_SL* creaNodo( char* titolo ) {
   return nuovoPtr;
 }
 
-Studente_SL* creaNodoStudente( int matricola ) {
+static Studente_SL* creaNodoStudente( int matricola ) {
 
   Studente_SL* nuovoPtr = ( Studente_SL* )malloc( sizeof( Studente_SL ) );
 
@@ -150,7 +150,7 @@ Studente_SL* creaNodoStudente( int matricola ) {
   return nuovoPtr;
 }
 
-void inserimentoLibriDaFile( Biblioteca_SL** Testa, FILE* ptrLibri ) {
+static void inserimentoLibriDaFile( Biblioteca_SL** Testa, FILE* ptrLibri ) {
 
   char titolo[ 100 ];
   Biblioteca_SL* temp = NULL;
@@ -178,7 +178,7 @@ void inserimentoLibriDaFile( Biblioteca_SL** Testa, FILE* ptrLibri ) {
   }
 }
 
-int verificaMatricola( Studente_SL** TestaStudente, int matricola ) {
+static int verificaMatricola( Studente_SL** TestaStudente, int matricola ) {
 
   Studente_SL* temp = *TestaStudente;
 
@@ -194,7 +194,7 @@ int verificaMatricola( Studente_SL** TestaStudente, int matricola ) {
   }
 }
 
-int prelevaLibro( Biblioteca_SL** Testa, char* libro ) {
+static int prelevaLibro( Biblioteca_SL** Testa, char* libro ) {
 
     Biblioteca_SL* currentPtr = *Testa;
     Biblioteca_SL* previousPtr = NULL;
@@ -225,7 +225,7 @@ int prelevaLibro( Biblioteca_SL** Testa, char* libro ) {
     return trovato;
 }
 
-int ricercaLibroElenco( char* libro, int matricola, Studente_SL** TestaStudente ) {
+static int ricercaLibroElenco( char* libro, int matricola, Studente_SL** TestaStudente ) {
 
   int indice = 0;
   Studente_SL* temp = *TestaStudente;
@@ -246,7 +246,7 @@ int ricercaLibroElenco( char* libro, int matricola, Studente_SL** TestaStudente 
   return -1;
 }
 
-int ricercaLibroBiblioteca( char* libro ) {
+static int ricercaLibroBiblioteca( char* libro ) {
 
   int value;
   char titolo[ 30 ];
@@ -267,7 +267,7 @@ int ricercaLibroBiblioteca( char* libro ) {
   return value;
 }
 
-void inserisciInBiblioteca( Biblioteca_SL** Testa, Biblioteca_SL** nodoSL ) {
+static void inserisciInBiblioteca( Biblioteca_SL** Testa, Biblioteca_SL** nodoSL ) {
 
   ( *nodoSL )->next = *Testa;
   *Testa = *nodoSL;
@@ -282,7 +282,7 @@ Studente_SL* ricercaNodoMatricola( Studente_SL** TestaStudente, int matricola ) 
   return temp;
 }
 
-void eliminaNodoStudente( Studente_SL** TestaStudente, Studente_SL* deleteNode ) {
+static void eliminaNodoStudente( Studente_SL** TestaStudente, Studente_SL* deleteNode ) {
 
   Studente_SL* currentPtr = *TestaStudente;
   Studente_SL* previousPtr = NULL;
@@ -310,7 +310,7 @@ void eliminaNodoStudente( Studente_SL** TestaStudente, Studente_SL* deleteNode )
   }
 }
 
-int restituireLibri( Biblioteca_SL** Testa, int matricola, Studente_SL** TestaStudente, char* libro ) {
+static int restituireLibri( Biblioteca_SL** Testa, int matricola, Studente_SL** TestaStudente, char* libro ) {
 
     int indiceLibro = 0;
     Biblioteca_SL* newPtr = NULL;
@@ -335,7 +335,7 @@ int restituireLibri( Biblioteca_SL** Testa, int matricola, Studente_SL** TestaSt
     }
 }
 
-void gestioneDeadlock( Biblioteca_SL** Testa, Studente_SL** TestaStudente, char* libro, int matricola ) {
+static void gestioneDeadlock( Biblioteca_SL** Testa, Studente_SL** TestaStudente, char* libro, int matricola ) {
 
   Studente_SL* tempStudente = *TestaStudente;
   int indice = 0;
