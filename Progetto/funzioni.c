@@ -4,6 +4,7 @@
 #include <unistd.h>
 #include "funzioni.h"
 
+
 void prelevazioneLibri( Biblioteca_SL** Testa, Studente_SL** TestaStudente ) {
 
   int libroElenco, libroBiblioteca;
@@ -118,7 +119,7 @@ static void aggiungiMatricola( int matricola, Studente_SL** TestaStudente ) {
   }
 }
 
-static void stampaLibri( Biblioteca_SL** Testa ) {
+void stampaLibri( Biblioteca_SL** Testa ) {
 
   Biblioteca_SL* temp = *Testa;
 
@@ -149,7 +150,7 @@ static Studente_SL* creaNodoStudente( int matricola ) {
   return nuovoPtr;
 }
 
-static void inserimentoLibriDaFile( Biblioteca_SL** Testa, FILE* ptrLibri ) {
+void inserimentoLibriDaFile( Biblioteca_SL** Testa, FILE* ptrLibri ) {
 
   char titolo[ 100 ];
   Biblioteca_SL* temp = NULL;
