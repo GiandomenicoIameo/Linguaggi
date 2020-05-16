@@ -10,7 +10,7 @@ struct Nodo_SL {
 typedef struct Nodo_SL Nodo_SL;
 
 Nodo_SL* creaNodo( int data );
-void inserimento( Nodo_SL** Testa, int nodi );
+void insert( Nodo_SL** Testa, int nodi );
 void stampaLista( Nodo_SL** Testa, int nodi );
 
 int main( void ) {
@@ -23,7 +23,7 @@ int main( void ) {
   printf( "Inserisci numero nodi : " );
   scanf( "%d", &nodi );
 
-  inserimento( &listPtr, nodi );
+  insert( &listPtr, nodi );
   stampaLista( &listPtr, nodi );
 
   return 0;
@@ -39,7 +39,7 @@ Nodo_SL* creaNodo( int data ) {
   return nuovoNodo;
 }
 
-void inserimento( Nodo_SL** Testa, int nodi ) {
+void insert( Nodo_SL** Testa, int nodi ) {
 
   Nodo_SL* tempTesta = NULL;
   int count, random;
