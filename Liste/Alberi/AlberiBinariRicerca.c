@@ -45,8 +45,6 @@ int main( void ) {
     puts( "Il nodo non è trovato" );
   }
 
-
-
   return 0;
 }
 
