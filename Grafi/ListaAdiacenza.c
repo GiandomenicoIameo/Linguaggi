@@ -78,7 +78,7 @@ void insert( Grafo** graph, int key, int vertice ) {
   ListAdj* newPtr = creaNodo( key );
 
   if( tempGraph->adj[ vertice ] == NULL ) {
-      tempGraph->adj[ vertice ] = creaNodo( key );
+      tempGraph->adj[ vertice ] = newPtr;
   }
   else {
     newPtr->next = tempGraph->adj[ vertice ];
@@ -89,7 +89,9 @@ void insert( Grafo** graph, int key, int vertice ) {
 void stampaLista( Grafo* graph ) {
 
   for( int indiceVertice = 0; indiceVertice < graph->numeroVertici; indiceVertice++ ) {
-       if( graph->adj[ indiceVertice ] == NULL ) continue;
+       if( graph->adj[ indiceVertice ] == NULL ) {
+         printf( "Vertice [ %d ] : \n", indiceVertice );
+       }
        else {
             printf( "Vertice [ %d ] : ", indiceVertice );
             while( graph->adj[ indiceVertice ] != NULL ) {
