@@ -36,7 +36,7 @@ int main( void ) {
   graph = creaLista( vertice, lato );
 
   for( int indice = 0; indice < lato; indice++ ) {
-    value = rand() % 100;
+    value = rand() % vertice;
     randomVertice = rand() % vertice;
     insert( &graph, value, randomVertice );
   }
@@ -88,19 +88,15 @@ void insert( Grafo** graph, int key, int vertice ) {
 
 void stampaLista( Grafo* graph ) {
 
-  int indiceVertice = 0;
-
-  while( indiceVertice < graph->numeroVertici ) {
-      if( graph->adj[ indiceVertice ] == NULL ) {
-        indiceVertice++;
-        continue;
-      } else {
-        while( graph->adj[ indiceVertice ] != NULL ) {
-            printf( "%d ", graph->adj[ indiceVertice ]->key );
-            graph->adj[ indiceVertice ] = graph->adj[ indiceVertice ]->next;
-        }
+  for( int indiceVertice = 0; indiceVertice < graph->numeroVertici; indiceVertice++ ) {
+       if( graph->adj[ indiceVertice ] == NULL ) continue;
+       else {
+            printf( "Vertice [ %d ] : ", indiceVertice );
+            while( graph->adj[ indiceVertice ] != NULL ) {
+                  printf( "%d ", graph->adj[ indiceVertice ]->key );
+                  graph->adj[ indiceVertice ] = graph->adj[ indiceVertice ]->next;
+            }
+            puts( "" );
       }
-      puts( "" );
-      indiceVertice++;
-    }
+  }
 }
