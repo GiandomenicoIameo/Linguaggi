@@ -34,8 +34,14 @@ int main( void ) {
   puts( "" );
 
 for( int i = 0; i < summit; i++ ) {
+  printf(  "     [ %d ]", i );
+}
+puts( "" );
+
+for( int i = 0; i < summit; i++ ) {
+  printf( "[ %d ]  ", i );
   for( int j = 0; j < summit; j++ ) {
-    printf( "%d ", graphAdj[ i ][ j ] );
+    printf( "%d         ", graphAdj[ i ][ j ] );
   }
   puts( "" );
 }
