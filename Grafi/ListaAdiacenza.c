@@ -2,30 +2,28 @@
 #include <stdlib.h>
 #include <time.h>
 
-struct ListAdj {
+struct ListAdiacenza {
   int key;
-  struct ListAdj* next;
+  struct ListAdiacenza* next;
 };
 
 struct Grafo {
   int numeroVertici;
-  struct ListAdj** adj;
+  struct ListAdiacenza** summit;
 };
 
 typedef struct Grafo Grafo;
-typedef struct ListAdj ListAdj;
+typedef struct ListAdiacenza ListAdiacenza;
 
 Grafo* creaLista( int vertici, int lati );
-void insert( Grafo** graph, int key, int vertice );
+void insert( Grafo** graph , int key, int vertice );
 void stampaLista( Grafo* graph );
-ListAdj* creaNodo( int key );
+ListAdiacenza* creaNodo( int key );
 
 int main( void ) {
 
   Grafo* graph = NULL;
-  int vertice, lato, value, randomVertice;
-
-  srand( time( NULL ) );
+  int vertice, lato, nodoDestinazione, randomVertice;
 
   printf( "Inserisci numero vertici : " );
   scanf( "%d", &vertice );
@@ -34,11 +32,14 @@ int main( void ) {
   scanf( "%d", &lato );
 
   graph = creaLista( vertice, lato );
+  srand( time( NULL ) );
 
   for( int indice = 0; indice < lato; indice++ ) {
-    value = rand() % vertice;
+
+    nodoDestinazione = rand() % vertice;
     randomVertice = rand() % vertice;
-    insert( &graph, value, randomVertice );
+
+    insert( &graph , nodoDestinazione, randomVertice );
   }
 
   puts( "" );
@@ -47,9 +48,9 @@ int main( void ) {
   return 0;
 }
 
-ListAdj* creaNodo( int key ) {
+ListAdiacenza* creaNodo( int key ) {
 
-  ListAdj* newPtr = ( ListAdj* )malloc( sizeof( ListAdj ) );
+  ListAdiacenza* newPtr = ( ListAdiacenza* )malloc( sizeof( ListAdiacenza ) );
   newPtr->key = key;
   newPtr->next = NULL;
 
@@ -59,14 +60,12 @@ ListAdj* creaNodo( int key ) {
 Grafo* creaLista( int vertici, int lati ) {
 
   Grafo* graph = ( Grafo* )malloc( sizeof( Grafo ) );
-  int indice = 0;
 
   graph->numeroVertici = vertici;
-  graph->adj = ( ListAdj** )calloc( vertici, sizeof( ListAdj* ) );
+  graph->summit = ( ListAdiacenza** )calloc( vertici, sizeof( ListAdiacenza* ) );
 
-  while( indice < vertici ) {
-    graph->adj[ indice ] = NULL;
-    indice++;
+  for( int indice = 0; indice < vertici; indice++ ) {
+       graph->summit[ indice ] = NULL;
   }
 
   return graph;
@@ -74,29 +73,43 @@ Grafo* creaLista( int vertici, int lati ) {
 
 void insert( Grafo** graph, int key, int vertice ) {
 
-  Grafo* tempGraph = *graph;
-  ListAdj* newPtr = creaNodo( key );
+  ListAdiacenza** list = ( *graph )->summit;
+  ListAdiacenza* tempTesta = NULL;
+  ListAdiacenza* newPtr = NULL;
 
-  if( tempGraph->adj[ vertice ] == NULL ) {
-      tempGraph->adj[ vertice ] = newPtr;
+  if( list[ vertice ] == NULL ) {
+      if( vertice == key ) return;
+      list[ vertice ] = creaNodo( key );
   }
   else {
-    newPtr->next = tempGraph->adj[ vertice ];
-    tempGraph->adj[ vertice ] = newPtr;
+    tempTesta = list[ vertice ];
+
+    while( tempTesta != NULL ) {
+      if( tempTesta->key == key || vertice == key ) {
+          return;
+      }
+      tempTesta = tempTesta->next;
+    }
+
+    newPtr = creaNodo( key );
+    newPtr->next = list[ vertice ];
+    list[ vertice ] = newPtr;
   }
 }
 
 void stampaLista( Grafo* graph ) {
 
+  ListAdiacenza** list = graph->summit;
+
   for( int indiceVertice = 0; indiceVertice < graph->numeroVertici; indiceVertice++ ) {
-       if( graph->adj[ indiceVertice ] == NULL ) {
+       if( list[ indiceVertice ] == NULL ) {
          printf( "Vertice [ %d ] : \n", indiceVertice );
        }
        else {
             printf( "Vertice [ %d ] : ", indiceVertice );
-            while( graph->adj[ indiceVertice ] != NULL ) {
-                  printf( "%d ", graph->adj[ indiceVertice ]->key );
-                  graph->adj[ indiceVertice ] = graph->adj[ indiceVertice ]->next;
+            while( list[ indiceVertice ] != NULL ) {
+                  printf( "%d ", list[ indiceVertice ]->key );
+                  list[ indiceVertice ] = list[ indiceVertice ]->next;
             }
             puts( "" );
       }
