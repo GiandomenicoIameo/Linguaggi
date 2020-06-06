@@ -11,7 +11,7 @@ void rimuoviLato( int** grafo, int verticeTesta, int verticeCoda );
 void rimuoviVertice( int*** grafo, int numVertice );
 void aggiungiLato( int** grafo, int verticeTesta, int verticeCoda );
 void aggiungiVertice( int*** grafo, int numVertice );
-int verificaAdiacenza( int** grafo, int verticeSrc, int verticeDst );
+int verificaAdiacenzaVertici( int** grafo, int verticeSrc, int verticeDst );
 
 int main( void ) {
 
@@ -108,7 +108,7 @@ void aggiungiLato( int** grafo, int verticeTesta, int verticeCoda ) {
     grafo[ verticeTesta ][ verticeCoda ] = 1;
 }
 
-int verificaAdiacenza( int** grafo, int verticeSrc, int verticeDst ) {
+int verificaAdiacenzaVertici( int** grafo, int verticeSrc, int verticeDst ) {
 
     return grafo[ verticeSrc ][ verticeDst ];
 }
