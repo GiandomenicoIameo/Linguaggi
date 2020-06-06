@@ -2,12 +2,12 @@
 #include <stdlib.h>
 #include <time.h>
 
-void creaMatrice( int summit, int*** graphAdj );
-void inizializza( int summit, int** graphAdj );
+void creaMatrice( int summit, int*** grafo );
+void inizializza( int summit, int** grafo );
 
 int main( void ) {
 
-  int** graphAdj;
+  int** grafo;
   int randomRow, randomCol, summit, side, indice = 0;
 
   srand( time( NULL ) );
@@ -17,17 +17,17 @@ int main( void ) {
   printf( "Inserisci numero lati : " );
   scanf( "%d", &side );
 
-  creaMatrice( summit, &graphAdj );
-  inizializza( summit, graphAdj );
+  creaMatrice( summit, &grafo );
+  inizializza( summit, grafo );
 
   while( indice < side ) {
     randomRow = rand() % summit;
     randomCol = rand() % summit;
 
-    if( graphAdj[ randomRow ][ randomCol ] ) {
+    if( grafo[ randomRow ][ randomCol ] ) {
         indice--;
     } else {
-        graphAdj[ randomRow ][ randomCol ] = 1;
+        grafo[ randomRow ][ randomCol ] = 1;
     }
     indice = indice + 1;
   }
@@ -41,7 +41,7 @@ puts( "" );
 for( int i = 0; i < summit; i++ ) {
   printf( "[ %d ]  ", i );
   for( int j = 0; j < summit; j++ ) {
-    printf( "%d         ", graphAdj[ i ][ j ] );
+    printf( "%d         ", grafo[ i ][ j ] );
   }
   puts( "" );
 }
@@ -49,18 +49,18 @@ for( int i = 0; i < summit; i++ ) {
   return 0;
 }
 
-void creaMatrice( int summit, int*** graphAdj ) {
+void creaMatrice( int summit, int*** grafo ) {
 
-  *graphAdj = ( int** )calloc( summit, sizeof( int* ) );
+  *grafo = ( int** )calloc( summit, sizeof( int* ) );
   for( int indice = 0; indice < summit; indice++ ) {
-      ( *graphAdj )[ indice ] = ( int* )calloc( summit, sizeof( int ) );
+      ( *grafo )[ indice ] = ( int* )calloc( summit, sizeof( int ) );
   }
 }
 
-void inizializza( int summit, int** graphAdj ) {
+void inizializza( int summit, int** grafo ) {
 
   for( int indiceRow = 0; indiceRow < summit; indiceRow++ ) {
     for( int indiceCol = 0; indiceCol < summit; indiceCol++ )
-      graphAdj[ indiceRow ][ indiceCol ] = 0;
+      grafo[ indiceRow ][ indiceCol ] = 0;
   }
 }
