@@ -23,6 +23,7 @@ ListAdiacenza* creaNodo( int key, int peso );
 void riempiLista( Grafo* graph, int lato, int vertice );
 int isDuplicate( ListAdiacenza* nodePtr, int key, int vertice );
 void insertTesta( ListAdiacenza* nodePtr, ListAdiacenza** vertice );
+void rimuoviLato( Grafo** graph, int verticeSrc, int verticeDst );
 
 int main( void ) {
 
@@ -87,43 +88,27 @@ Grafo* creaLista( int vertici, int lati ) {
 void insert( Grafo** graph, int key, int vertice ) {
 
   ListAdiacenza** list = ( *graph )->summit;
-  ListAdiacenza* newPtrVertice = NULL;
-  ListAdiacenza* newPtrKey = NULL;
-  int randomWeight, True;
+  ListAdiacenza* nodeVertice = NULL;
+  ListAdiacenza* nodeKey = NULL;
+  int peso;
 
-  if( list[ vertice ] == NULL && list[ key ] == NULL ) {
       if( vertice == key ) {
           return;
       }
-      randomWeight = ( rand() % 20 ) + 1;
-      list[ vertice ] = creaNodo( key, randomWeight );
-      list[ key ] = creaNodo( vertice, randomWeight );
-  }
-  else {
 
-    if( !list[ vertice ] ) {
-      randomWeight = ( rand() % 20 ) + 1;
-      list[ vertice ] = creaNodo( key, randomWeight );
+      peso = ( rand() % 20 ) + 1;
 
-      True = isDuplicate( list[ key ], key, vertice );
-      if( True ) {
-        return;
+      if( isDuplicate( list[ vertice ], vertice, key ) ) {
+          rimuoviLato( graph, vertice, key );
+          rimuoviLato( graph, key, vertice );
       }
-      newPtrKey = creaNodo( vertice, randomWeight );
-      insertTesta( newPtrKey, &( list[ key ] ) );
 
-    } else if( !list[ key ] ) {
-      randomWeight = ( rand() % 20 ) + 1;
-      list[ key ] = creaNodo( vertice, randomWeight );
+      nodeKey = creaNodo( vertice, peso );
+      insertTesta( nodeKey, &( list[ key ] ) );
 
-      True = isDuplicate( list[ vertice ], key, vertice );
-      if( True ) {
-        return;
-      }
-      newPtrVertice = creaNodo( key, randomWeight );
-      insertTesta( newPtrVertice, &( list[ vertice ] ) );
-    }
-  }
+      nodeVertice = creaNodo( key, peso );
+      insertTesta( nodeVertice, &( list[ vertice ] ) );
+
 }
 
 void stampaLista( Grafo* graph ) {
@@ -157,4 +142,31 @@ void riempiLista( Grafo* graph, int lato, int vertice ) {
 
     insert( &graph, nodoDestinazione, randomVertice );
   }
+}
+
+void rimuoviLato( Grafo** graph, int verticeSrc, int verticeDst ) {
+
+    ListAdiacenza** list = ( *graph )->summit;
+    ListAdiacenza* currentPtr = ( *graph )->summit[ verticeSrc ]->next;
+    ListAdiacenza* previousPtr = ( *graph )->summit[ verticeSrc ];
+    ListAdiacenza* delete = NULL;
+
+    if( ( *graph )->summit[ verticeSrc ]->key == verticeDst ) {
+      delete = ( *graph )->summit[ verticeSrc ];
+      ( *graph )->summit[ verticeSrc ] = ( *graph )->summit[ verticeSrc ]->next;
+      free( delete );
+      return;
+    }
+
+    while( currentPtr->key != verticeDst ) {
+      previousPtr = currentPtr;
+      currentPtr = currentPtr->next;
+    }
+
+    if( currentPtr != NULL ) {
+      delete = currentPtr;
+      previousPtr->next = currentPtr->next;
+      free( delete );
+      return;
+    }
 }
