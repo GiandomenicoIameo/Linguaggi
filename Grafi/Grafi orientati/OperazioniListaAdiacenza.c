@@ -16,13 +16,14 @@ typedef struct Grafo Grafo;
 typedef struct ListAdiacenza ListAdiacenza;
 
 Grafo* creaLista( int vertice, int lato );
-void insert( Grafo** graph , int key, int vertice );
 void stampaLista( Grafo* graph );
+void insert( Grafo** graph , int key, int vertice );
 ListAdiacenza* creaNodo( int key );
 int visualizzaGrado( Grafo* graph, int vertice );
 int verificaAdiacenzaVertici( Grafo* graph, int verticeSrc, int verticeDst );
 void aggiuntiVertice( Grafo** graph );
 int aggiungiLato( Grafo* graph, int verticeSrc, int verticeDst );
+void rimuoviLato( Grafo** graph, int verticeSrc, int verticeDst );
 void rimuoviVertice( Grafo* graph, int vertice );
 int grafoCompleto( Grafo* graph );
 
@@ -44,14 +45,23 @@ int main( void ) {
     nodoDestinazione = rand() % vertice;
     randomVertice = rand() % vertice;
 
-    insert( &graph , nodoDestinazione, randomVertice );
+    insert( &graph, nodoDestinazione, randomVertice );
   }
 
     puts( "" );
     stampaLista( graph );
     puts( "" );
 
-    grafoCompleto( graph );
+    printf( "Inserisci vertice : " );
+    scanf( "%d", &vertice );
+    printf( "Inserisci vertice : " );
+    scanf( "%d", &lato );
+
+    rimuoviLato( &graph, vertice, lato );
+
+    puts( "" );
+    stampaLista( graph );
+    puts( "" );
 
   return 0;
 }
@@ -193,4 +203,31 @@ int grafoCompleto( Grafo* graph ) {
     if( count < ( graph->numeroVertici - 1 ) ) return 0;
   }
   return 1;
+}
+
+void rimuoviLato( Grafo** graph, int verticeSrc, int verticeDst ) {
+
+    ListAdiacenza** list = ( *graph )->summit;
+    ListAdiacenza* currentPtr = ( *graph )->summit[ verticeSrc ]->next;
+    ListAdiacenza* previousPtr = ( *graph )->summit[ verticeSrc ];
+    ListAdiacenza* delete = NULL;
+
+    if( ( *graph )->summit[ verticeSrc ]->key == verticeDst ) {
+      delete = ( *graph )->summit[ verticeSrc ];
+      ( *graph )->summit[ verticeSrc ] = ( *graph )->summit[ verticeSrc ]->next;
+      free( delete );
+      return;
+    }
+
+    while( currentPtr->key != verticeDst ) {
+      previousPtr = currentPtr;
+      currentPtr = currentPtr->next;
+    }
+
+    if( currentPtr != NULL ) {
+      delete = currentPtr;
+      previousPtr->next = currentPtr->next;
+      free( delete );
+      return;
+    }
 }
