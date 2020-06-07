@@ -19,11 +19,12 @@ Grafo* creaLista( int vertici, int lati );
 void insert( Grafo** graph , int key, int vertice );
 void stampaLista( Grafo* graph );
 ListAdiacenza* creaNodo( int key );
+void riempiLista( Grafo* graph, int lato, int vertice );
 
 int main( void ) {
 
   Grafo* graph = NULL;
-  int vertice, lato, nodoDestinazione, randomVertice;
+  int vertice, lato;
 
   printf( "Inserisci numero vertici : " );
   scanf( "%d", &vertice );
@@ -32,17 +33,7 @@ int main( void ) {
   scanf( "%d", &lato );
 
   graph = creaLista( vertice, lato );
-  srand( time( NULL ) );
-
-  for( int indice = 0; indice < lato; indice++ ) {
-
-    nodoDestinazione = rand() % vertice;
-    randomVertice = rand() % vertice;
-
-    insert( &graph , nodoDestinazione, randomVertice );
-  }
-
-  puts( "" );
+  riempiLista( graph, lato, vertice );
   stampaLista( graph );
 
   return 0;
@@ -113,5 +104,19 @@ void stampaLista( Grafo* graph ) {
             }
             puts( "" );
       }
+  }
+}
+
+void riempiLista( Grafo* graph, int lato, int vertice ) {
+
+  int randomVertice, nodoDestinazione;
+  srand( time( NULL ) );
+
+  for( int indice = 0; indice < lato; indice++ ) {
+
+    nodoDestinazione = rand() % vertice;
+    randomVertice = rand() % vertice;
+
+    insert( &graph, nodoDestinazione, randomVertice );
   }
 }
