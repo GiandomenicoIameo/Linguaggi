@@ -100,13 +100,14 @@ void insert( Grafo** graph, int key, int vertice ) {
       rimuoviLato( graph, vertice, key );
       rimuoviLato( graph, key, vertice );
   }
+  else {
+    
+    nodeKey = creaNodo( vertice );
+    insertTesta( nodeKey, &( list[ key ] ) );
 
-  nodeKey = creaNodo( vertice, peso );
-  insertTesta( nodeKey, &( list[ key ] ) );
-
-  nodeVertice = creaNodo( key, peso );
-  insertTesta( nodeVertice, &( list[ vertice ] ) );
-
+    nodeVertice = creaNodo( key );
+    insertTesta( nodeVertice, &( list[ vertice ] ) );
+  }
 }
 
 void stampaLista( Grafo* graph ) {
