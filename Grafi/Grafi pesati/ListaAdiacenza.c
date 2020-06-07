@@ -53,7 +53,7 @@ void insertTesta( ListAdiacenza* nodePtr, ListAdiacenza** vertice ) {
 int isDuplicate( ListAdiacenza* nodePtr, int key, int vertice ) {
 
   while( nodePtr != NULL ) {
-    if( nodePtr->key == key || vertice == key ) {
+    if( nodePtr->key == key ) {
         return 1;
     }
     nodePtr = nodePtr->next;
@@ -92,22 +92,20 @@ void insert( Grafo** graph, int key, int vertice ) {
   ListAdiacenza* nodeKey = NULL;
   int peso;
 
-      if( vertice == key ) {
-          return;
-      }
+  if( vertice == key ) return;
 
-      peso = ( rand() % 20 ) + 1;
+  peso = ( rand() % 20 ) + 1;
 
-      if( isDuplicate( list[ vertice ], vertice, key ) ) {
-          rimuoviLato( graph, vertice, key );
-          rimuoviLato( graph, key, vertice );
-      }
+  if( isDuplicate( list[ vertice ], vertice, key ) ) {
+      rimuoviLato( graph, vertice, key );
+      rimuoviLato( graph, key, vertice );
+  }
 
-      nodeKey = creaNodo( vertice, peso );
-      insertTesta( nodeKey, &( list[ key ] ) );
+  nodeKey = creaNodo( vertice, peso );
+  insertTesta( nodeKey, &( list[ key ] ) );
 
-      nodeVertice = creaNodo( key, peso );
-      insertTesta( nodeVertice, &( list[ vertice ] ) );
+  nodeVertice = creaNodo( key, peso );
+  insertTesta( nodeVertice, &( list[ vertice ] ) );
 
 }
 
