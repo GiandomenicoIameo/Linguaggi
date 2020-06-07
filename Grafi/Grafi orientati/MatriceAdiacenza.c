@@ -2,65 +2,78 @@
 #include <stdlib.h>
 #include <time.h>
 
-void creaMatrice( int summit, int*** grafo );
-void inizializza( int summit, int** grafo );
+void creaMatrice( int*** grafo, int numVertice );
+void inizializza( int** grafo, int numVertice );
+void stampaMatrice( int** grafo, int numVertice );
+void riempiMatrice( int** grafo, int numLato, int numVertice );
 
 int main( void ) {
 
   int** grafo;
-  int randomRow, randomCol, summit, side, indice = 0;
+  int numVertice, numLato;
 
   srand( time( NULL ) );
 
   printf( "Inserisci numero vertici : " );
-  scanf( "%d", &summit );
+  scanf( "%d", &numVertice );
   printf( "Inserisci numero lati : " );
-  scanf( "%d", &side );
+  scanf( "%d", &numLato );
 
-  creaMatrice( summit, &grafo );
-  inizializza( summit, grafo );
-
-  while( indice < side ) {
-    randomRow = rand() % summit;
-    randomCol = rand() % summit;
-
-    if( grafo[ randomRow ][ randomCol ] ) {
-        indice--;
-    } else {
-        grafo[ randomRow ][ randomCol ] = 1;
-    }
-    indice = indice + 1;
-  }
-  puts( "" );
-
-for( int i = 0; i < summit; i++ ) {
-  printf(  "     [ %d ]", i );
-}
-puts( "" );
-
-for( int i = 0; i < summit; i++ ) {
-  printf( "[ %d ]  ", i );
-  for( int j = 0; j < summit; j++ ) {
-    printf( "%d         ", grafo[ i ][ j ] );
-  }
-  puts( "" );
-}
+  creaMatrice( &grafo, numVertice );
+  inizializza( grafo, numVertice );
+  riempiMatrice( grafo, numLato, numVertice );
+  stampaMatrice( grafo, numVertice );
 
   return 0;
 }
 
-void creaMatrice( int summit, int*** grafo ) {
+void creaMatrice( int*** grafo, int numVertice ) {
 
-  *grafo = ( int** )calloc( summit, sizeof( int* ) );
-  for( int indice = 0; indice < summit; indice++ ) {
-      ( *grafo )[ indice ] = ( int* )calloc( summit, sizeof( int ) );
+  *grafo = ( int** )calloc( numVertice, sizeof( int* ) );
+  for( int indice = 0; indice < numVertice; indice++ ) {
+      ( *grafo )[ indice ] = ( int* )calloc( numVertice, sizeof( int ) );
   }
 }
 
-void inizializza( int summit, int** grafo ) {
+void inizializza( int** grafo, int numVertice ) {
 
-  for( int indiceRow = 0; indiceRow < summit; indiceRow++ ) {
-    for( int indiceCol = 0; indiceCol < summit; indiceCol++ )
+  for( int indiceRow = 0; indiceRow < numVertice; indiceRow++ ) {
+    for( int indiceCol = 0; indiceCol < numVertice; indiceCol++ )
       grafo[ indiceRow ][ indiceCol ] = 0;
+  }
+}
+
+void stampaMatrice( int** grafo, int numVertice ) {
+
+  for( int indice = 0; indice < numVertice; indice++ ) {
+    printf(  "     [ %d ]", indice );
+  }
+  puts( "" );
+
+  for( int indiceRow = 0; indiceRow < numVertice; indiceRow++ ) {
+    printf( "[ %d ]  ", indiceRow );
+    for( int indiceCol = 0; indiceCol < numVertice; indiceCol++ ) {
+      printf( "%d         ", grafo[ indiceRow ][ indiceCol ] );
+    }
+    puts( "" );
+  }
+}
+
+void riempiMatrice( int** grafo, int numLato, int numVertice ) {
+
+  int indice = 0;
+  int randomCol, randomRow;
+
+  while( indice < numLato ) {
+
+      randomRow = rand() % numVertice;
+      randomCol = rand() % numVertice;
+
+      if( grafo[ randomRow ][ randomCol ] ) {
+          indice--;
+      } else {
+          grafo[ randomRow ][ randomCol ] = 1;
+      }
+      indice = indice + 1;
   }
 }
