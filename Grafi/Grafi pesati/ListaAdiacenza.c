@@ -145,7 +145,6 @@ void riempiLista( Grafo* graph, int lato, int vertice ) {
 
 void rimuoviLato( Grafo** graph, int verticeSrc, int verticeDst ) {
 
-    ListAdiacenza** list = ( *graph )->summit;
     ListAdiacenza* currentPtr = ( *graph )->summit[ verticeSrc ]->next;
     ListAdiacenza* previousPtr = ( *graph )->summit[ verticeSrc ];
     ListAdiacenza* delete = NULL;
