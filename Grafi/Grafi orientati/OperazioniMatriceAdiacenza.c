@@ -12,6 +12,7 @@ void rimuoviVertice( int*** grafo, int numVertice );
 void aggiungiLato( int** grafo, int verticeTesta, int verticeCoda );
 void aggiungiVertice( int*** grafo, int numVertice );
 int verificaAdiacenzaVertici( int** grafo, int verticeSrc, int verticeDst );
+int grafoCompleto( int** grafo, int numVertice );
 
 int main( void ) {
 
@@ -141,4 +142,14 @@ void rimuoviVertice( int*** grafo, int numVertice ) {
           ( *grafo )[ indiceRow ][ indiceCol ] = tempMatrix[ indiceRow ][ indiceCol ];
     }
   }
+}
+
+int grafoCompleto( int** grafo, int numVertice ) {
+
+  for( int indiceRow = 0; indiceRow < numVertice; indiceRow++ ) {
+    for( int indiceCol = 0; indiceCol < numVertice; indiceCol++ ) {
+      if( grafo[ indiceRow ][ indiceCol ] == 0 ) return 0;
+    }
+  }
+  return 1;
 }
