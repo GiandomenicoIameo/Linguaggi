@@ -22,6 +22,7 @@ ListAdiacenza* creaNodo( int key );
 void riempiLista( Grafo* graph, int lato, int vertice );
 int isDuplicate( ListAdiacenza* nodePtr, int key, int vertice );
 void insertTesta( ListAdiacenza* nodePtr, ListAdiacenza** vertice );
+void rimuoviLato( Grafo** graph, int verticeSrc, int verticeDst );
 
 int main( void ) {
 
@@ -47,7 +48,6 @@ void insertTesta( ListAdiacenza* nodePtr, ListAdiacenza** vertice ) {
   *vertice = nodePtr;
 }
 
-
 int isDuplicate( ListAdiacenza* nodePtr, int key, int vertice ) {
 
   while( nodePtr != NULL ) {
@@ -58,7 +58,6 @@ int isDuplicate( ListAdiacenza* nodePtr, int key, int vertice ) {
   }
   return 0;
 }
-
 
 ListAdiacenza* creaNodo( int key ) {
 
@@ -86,39 +85,21 @@ Grafo* creaLista( int vertici, int lati ) {
 void insert( Grafo** graph, int key, int vertice ) {
 
   ListAdiacenza** list = ( *graph )->summit;
-  ListAdiacenza* newPtrVertice = NULL;
-  ListAdiacenza* newPtrKey = NULL;
-  int True;
+  ListAdiacenza* nodeVertice = NULL;
+  ListAdiacenza* nodeKey = NULL;
 
-  if( list[ vertice ] == NULL && list[ key ] == NULL ) {
-      if( vertice == key ) {
-          return;
-      }
-      list[ vertice ] = creaNodo( key );
-      list[ key ] = creaNodo( vertice );
+  if( vertice == key ) return;
+
+  if( isDuplicate( list[ vertice ], key, vertice ) ) {
+      rimuoviLato( graph, vertice, key );
+      rimuoviLato( graph, key, vertice );
   }
   else {
+    nodeKey = creaNodo( vertice );
+    insertTesta( nodeKey, &( list[ key ] ) );
 
-    if( !list[ vertice ] ) {
-      list[ vertice ] = creaNodo( key );
-
-      True = isDuplicate( list[ key ], key, vertice );
-      if( True ) {
-        return;
-      }
-      newPtrKey = creaNodo( vertice );
-      insertTesta( newPtrKey, &( list[ key ] ) );
-
-    } else if( !list[ key ] ) {
-      list[ key ] = creaNodo( vertice );
-
-      True = isDuplicate( list[ vertice ], key, vertice );
-      if( True ) {
-        return;
-      }
-      newPtrVertice = creaNodo( key );
-      insertTesta( newPtrVertice, &( list[ vertice ] ) );
-    }
+    nodeVertice = creaNodo( key );
+    insertTesta( nodeVertice, &( list[ vertice ] ) );
   }
 }
 
@@ -153,4 +134,31 @@ void riempiLista( Grafo* graph, int lato, int vertice ) {
 
     insert( &graph, nodoDestinazione, randomVertice );
   }
+}
+
+void rimuoviLato( Grafo** graph, int verticeSrc, int verticeDst ) {
+
+    ListAdiacenza** list = ( *graph )->summit;
+    ListAdiacenza* currentPtr = ( *graph )->summit[ verticeSrc ]->next;
+    ListAdiacenza* previousPtr = ( *graph )->summit[ verticeSrc ];
+    ListAdiacenza* delete = NULL;
+
+    if( ( *graph )->summit[ verticeSrc ]->key == verticeDst ) {
+      delete = ( *graph )->summit[ verticeSrc ];
+      ( *graph )->summit[ verticeSrc ] = ( *graph )->summit[ verticeSrc ]->next;
+      free( delete );
+      return;
+    }
+
+    while( currentPtr->key != verticeDst ) {
+      previousPtr = currentPtr;
+      currentPtr = currentPtr->next;
+    }
+
+    if( currentPtr != NULL ) {
+      delete = currentPtr;
+      previousPtr->next = currentPtr->next;
+      free( delete );
+      return;
+    }
 }
