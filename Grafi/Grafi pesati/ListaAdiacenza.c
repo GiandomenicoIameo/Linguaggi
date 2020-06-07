@@ -101,11 +101,11 @@ void insert( Grafo** graph, int key, int vertice ) {
       rimuoviLato( graph, key, vertice );
   }
   else {
-    
-    nodeKey = creaNodo( vertice );
+
+    nodeKey = creaNodo( vertice, peso );
     insertTesta( nodeKey, &( list[ key ] ) );
 
-    nodeVertice = creaNodo( key );
+    nodeVertice = creaNodo( key, peso );
     insertTesta( nodeVertice, &( list[ vertice ] ) );
   }
 }
