@@ -5,7 +5,8 @@
 void creaMatrice( int numVertice, int*** grafo );
 void inizializza( int numVertice, int** grafo );
 void riempiMatrice( int numLato, int** grafo, int numVertice );
-int visualizzaGrado( int numVertice, int** grafo, int vertice );
+int visualizzaGradoEntrante( int** grafo, int numVertice, int vertice );
+int visualizzaGradoUscente( int** grafo, int numVertice, int vertice );
 void stampaMatrice( int numVertice, int** grafo );
 void rimuoviLato( int** grafo, int verticeTesta, int verticeCoda );
 void rimuoviVertice( int*** grafo, int numVertice );
@@ -32,6 +33,9 @@ int main( void ) {
   stampaMatrice( numVertice, grafo );
 
   puts( "" );
+  printf( "Inserisci vertice da esaminare : " );
+  scanf( "%d", &vertice );
+
   rimuoviVertice( &grafo, numVertice );
   stampaMatrice( numVertice - 1, grafo );
 
@@ -54,13 +58,26 @@ void inizializza( int numVertice, int** grafo ) {
   }
 }
 
-int visualizzaGrado( int numVertice, int** grafo, int vertice ) {
+int visualizzaGradoEntrante( int** grafo, int numVertice, int vertice ) {
+
+  int count = 0;
+
+  for( int indiceRow = 0; indiceRow < numVertice; indiceRow++ ) {
+    for( int indiceCol = 0; indiceCol < numVertice; indiceCol++ ) {
+          if( indiceRow == vertice ) continue;
+          if( grafo[ indiceRow ][ indiceCol ] == 1 && indiceCol == vertice ) count = count + 1;
+    }
+  }
+  return count;
+}
+
+int visualizzaGradoUscente( int** grafo, int numVertice, int vertice ) {
 
   int count = 0;
 
   for( int indice = 0; indice < numVertice; indice++ ) {
-    if( grafo[ vertice ][ indice ] == 1 ) count = count + 1;
-  }
+      if( grafo[ vertice ][ indice ] == 1 ) count = count + 1;
+    }
   return count;
 }
 
