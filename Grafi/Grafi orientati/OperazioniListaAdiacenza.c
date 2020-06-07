@@ -15,7 +15,7 @@ struct Grafo {
 typedef struct Grafo Grafo;
 typedef struct ListAdiacenza ListAdiacenza;
 
-Grafo* creaLista( int vertici, int lati );
+Grafo* creaLista( int vertice, int lato );
 void insert( Grafo** graph , int key, int vertice );
 void stampaLista( Grafo* graph );
 ListAdiacenza* creaNodo( int key );
@@ -23,7 +23,8 @@ int visualizzaGrado( Grafo* graph, int vertice );
 int verificaAdiacenzaVertici( Grafo* graph, int verticeSrc, int verticeDst );
 void aggiuntiVertice( Grafo** graph );
 int aggiungiLato( Grafo* graph, int verticeSrc, int verticeDst );
-void rimuoviVertice( Grafo** graph, int vertice );
+void rimuoviVertice( Grafo* graph, int vertice );
+int grafoCompleto( Grafo* graph );
 
 int main( void ) {
 
@@ -50,15 +51,7 @@ int main( void ) {
     stampaLista( graph );
     puts( "" );
 
-    printf( "Inserisci  vertice : " );
-    scanf( "%d", &vertice );
-
-    rimuoviVertice( &graph, vertice );
-
-    puts( "" );
-    stampaLista( graph );
-    puts( "" );
-
+    grafoCompleto( graph );
 
   return 0;
 }
@@ -72,14 +65,14 @@ ListAdiacenza* creaNodo( int key ) {
   return newPtr;
 }
 
-Grafo* creaLista( int vertici, int lati ) {
+Grafo* creaLista( int vertice, int lato ) {
 
   Grafo* graph = ( Grafo* )malloc( sizeof( Grafo ) );
 
-  graph->numeroVertici = vertici;
-  graph->summit = ( ListAdiacenza** )calloc( vertici, sizeof( ListAdiacenza* ) );
+  graph->numeroVertici = vertice;
+  graph->summit = ( ListAdiacenza** )calloc( vertice, sizeof( ListAdiacenza* ) );
 
-  for( int indice = 0; indice < vertici; indice++ ) {
+  for( int indice = 0; indice < vertice; indice++ ) {
        graph->summit[ indice ] = NULL;
   }
 
@@ -181,9 +174,23 @@ int aggiungiLato( Grafo* graph, int verticeSrc, int verticeDst ) {
 
 }
 
-void rimuoviVertice( Grafo** graph, int vertice ) {
+void rimuoviVertice( Grafo* graph, int vertice ) {
 
-     ( *graph )->summit[ vertice ] = NULL;
-     ( *graph )->summit[ vertice ];
-     free( ( *graph )->summit[ vertice ] );
+     graph->summit[ vertice ] = NULL;
+     graph->summit[ vertice ];
+     free( graph->summit[ vertice ] );
+}
+
+int grafoCompleto( Grafo* graph ) {
+
+  int count = 0;
+
+  for( int indiceVertice = 0; indiceVertice < graph->numeroVertici; indiceVertice++ ) {
+    while( graph->summit[ indiceVertice ] != NULL ) {
+           graph->summit[ indiceVertice ] = graph->summit[ indiceVertice ]->next;
+           count = count + 1;
+    }
+    if( count < ( graph->numeroVertici - 1 ) ) return 0;
+  }
+  return 1;
 }
