@@ -15,30 +15,57 @@ struct Grafo {
 typedef struct Grafo Grafo;
 typedef struct ListAdiacenza ListAdiacenza;
 
-Grafo* creaLista( int vertici, int lati );
-void insert( Grafo** graph , int key, int vertice );
+Grafo* creaLista( int vertice, int lato );
 void stampaLista( Grafo* graph );
+void insert( Grafo** graph , int key, int vertice );
 ListAdiacenza* creaNodo( int key );
-void riempiLista( Grafo* graph, int lato, int vertice );
-int isDuplicate( ListAdiacenza* nodePtr, int key, int vertice );
-void insertTesta( ListAdiacenza* nodePtr, ListAdiacenza** vertice );
+int visualizzaGrado( Grafo* graph, int vertice );
+int verificaAdiacenzaVertici( Grafo* graph, int verticeSrc, int verticeDst );
+void aggiuntiVertice( Grafo** graph );
+int aggiungiLato( Grafo* graph, int verticeSrc, int verticeDst );
 void rimuoviLato( Grafo** graph, int verticeSrc, int verticeDst );
+void rimuoviVertice( Grafo* graph, int vertice );
+int grafoCompleto( Grafo* graph );
+int verificaCicli( Grafo* graph, int lato );
+void insertTesta( ListAdiacenza* nodePtr, ListAdiacenza** vertice );
+int isDuplicate( ListAdiacenza* nodePtr, int key );
 
 int main( void ) {
 
   Grafo* graph = NULL;
-  int vertice, lato;
+  int vertice, lato, nodoDestinazione, randomVertice, grado;
 
   printf( "Inserisci numero vertici : " );
   scanf( "%d", &vertice );
-
   printf( "Inserisci numero lati : " );
   scanf( "%d", &lato );
 
   graph = creaLista( vertice, lato );
-  riempiLista( graph, lato, vertice );
-  stampaLista( graph );
+  srand( time( NULL ) );
 
+  for( int indice = 0; indice < lato; indice++ ) {
+
+    nodoDestinazione = rand() % vertice;
+    randomVertice = rand() % vertice;
+
+    insert( &graph, nodoDestinazione, randomVertice );
+  }
+
+  puts( "" );
+  stampaLista( graph );
+  puts( "" );
+
+  return 0;
+}
+
+int isDuplicate( ListAdiacenza* nodePtr, int key ) {
+
+  while( nodePtr != NULL ) {
+    if( nodePtr->key == key ) {
+        return 1;
+    }
+    nodePtr = nodePtr->next;
+  }
   return 0;
 }
 
@@ -46,17 +73,6 @@ void insertTesta( ListAdiacenza* nodePtr, ListAdiacenza** vertice ) {
 
   nodePtr->next = *vertice;
   *vertice = nodePtr;
-}
-
-int isDuplicate( ListAdiacenza* nodePtr, int key, int vertice ) {
-
-  while( nodePtr != NULL ) {
-    if( nodePtr->key == key || vertice == key ) {
-        return 1;
-    }
-    nodePtr = nodePtr->next;
-  }
-  return 0;
 }
 
 ListAdiacenza* creaNodo( int key ) {
@@ -68,14 +84,14 @@ ListAdiacenza* creaNodo( int key ) {
   return newPtr;
 }
 
-Grafo* creaLista( int vertici, int lati ) {
+Grafo* creaLista( int vertice, int lato ) {
 
   Grafo* graph = ( Grafo* )malloc( sizeof( Grafo ) );
 
-  graph->numeroVertici = vertici;
-  graph->summit = ( ListAdiacenza** )calloc( vertici, sizeof( ListAdiacenza* ) );
+  graph->numeroVertici = vertice;
+  graph->summit = ( ListAdiacenza** )calloc( vertice, sizeof( ListAdiacenza* ) );
 
-  for( int indice = 0; indice < vertici; indice++ ) {
+  for( int indice = 0; indice < vertice; indice++ ) {
        graph->summit[ indice ] = NULL;
   }
 
@@ -84,56 +100,113 @@ Grafo* creaLista( int vertici, int lati ) {
 
 void insert( Grafo** graph, int key, int vertice ) {
 
-  ListAdiacenza** list = ( *graph )->summit;
-  ListAdiacenza* nodeVertice = NULL;
-  ListAdiacenza* nodeKey = NULL;
+ ListAdiacenza** list = ( *graph )->summit;
+ ListAdiacenza* nodeVertice = NULL;
+ ListAdiacenza* nodeKey = NULL;
 
-  if( vertice == key ) return;
+ if( vertice == key ) return;
 
-  if( isDuplicate( list[ vertice ], key, vertice ) ) {
-      rimuoviLato( graph, vertice, key );
-      rimuoviLato( graph, key, vertice );
-  }
-  else {
-    nodeKey = creaNodo( vertice );
-    insertTesta( nodeKey, &( list[ key ] ) );
+ if( isDuplicate( list[ vertice ], key ) ) {
+     rimuoviLato( graph, vertice, key );
+     rimuoviLato( graph, key, vertice );
+ }
+ else {
+   nodeKey = creaNodo( vertice );
+   insertTesta( nodeKey, &( list[ key ] ) );
 
-    nodeVertice = creaNodo( key );
-    insertTesta( nodeVertice, &( list[ vertice ] ) );
-  }
+   nodeVertice = creaNodo( key );
+   insertTesta( nodeVertice, &( list[ vertice ] ) );
+ }
 }
 
 void stampaLista( Grafo* graph ) {
 
-  ListAdiacenza** list = graph->summit;
+  ListAdiacenza* vertice = NULL;
 
   for( int indiceVertice = 0; indiceVertice < graph->numeroVertici; indiceVertice++ ) {
-       if( list[ indiceVertice ] == NULL ) {
-         printf( "Vertice [ %d ] : \n", indiceVertice );
-       }
+       if( graph->summit[ indiceVertice ] == NULL )
+           printf( "Vertice [ %d ] : \n", indiceVertice );
        else {
+            vertice = graph->summit[ indiceVertice ];
             printf( "Vertice [ %d ] : ", indiceVertice );
-            while( list[ indiceVertice ] != NULL ) {
-                  printf( "%d ", list[ indiceVertice ]->key );
-                  list[ indiceVertice ] = list[ indiceVertice ]->next;
+            while( vertice != NULL ) {
+                  printf( "%d ", vertice->key );
+                  vertice = vertice->next;
             }
             puts( "" );
       }
   }
 }
 
-void riempiLista( Grafo* graph, int lato, int vertice ) {
+int visualizzaGrado( Grafo* graph, int vertice ) {
 
-  int randomVertice, nodoDestinazione;
-  srand( time( NULL ) );
+  ListAdiacenza* verticeNodo = graph->summit[ vertice ];
+  int count = 0;
 
-  for( int indice = 0; indice < lato; indice++ ) {
-
-    nodoDestinazione = rand() % vertice;
-    randomVertice = rand() % vertice;
-
-    insert( &graph, nodoDestinazione, randomVertice );
+  while( verticeNodo != NULL ) {
+    count = count + 1;
+    verticeNodo = verticeNodo->next;
   }
+  return count;
+}
+
+int verificaAdiacenzaVertici( Grafo* graph, int verticeSrc, int verticeDst ) {
+
+  ListAdiacenza* verticeS = graph->summit[ verticeSrc ];
+
+  while( verticeS != NULL ) {
+    if( verticeS->key == verticeDst ) return 1;
+    verticeS = verticeS->next;
+  }
+  return 0;
+}
+
+void aggiuntiVertice( Grafo** graph ) {
+
+    ListAdiacenza** grafo = ( *graph )->summit;
+
+    ( *graph )->numeroVertici++;
+    grafo = ( ListAdiacenza** )realloc( grafo, ( *graph )->numeroVertici * sizeof( ListAdiacenza* ) );
+
+}
+
+int aggiungiLato( Grafo* graph, int verticeSrc, int verticeDst ) {
+
+    ListAdiacenza* verticeS = graph->summit[ verticeSrc ];
+    ListAdiacenza* newPtr = NULL;
+
+    while( verticeS != NULL ) {
+      if( verticeS->key == verticeDst ) return 0;
+      verticeS = verticeS->next;
+    }
+
+    newPtr = creaNodo( verticeDst );
+    newPtr->next = graph->summit[ verticeSrc ];
+    graph->summit[ verticeSrc ] = newPtr;
+
+    return 1;
+
+}
+
+void rimuoviVertice( Grafo* graph, int vertice ) {
+
+     graph->summit[ vertice ] = NULL;
+     graph->summit[ vertice ];
+     free( graph->summit[ vertice ] );
+}
+
+int grafoCompleto( Grafo* graph ) {
+
+  int count = 0;
+
+  for( int indiceVertice = 0; indiceVertice < graph->numeroVertici; indiceVertice++ ) {
+    while( graph->summit[ indiceVertice ] != NULL ) {
+           graph->summit[ indiceVertice ] = graph->summit[ indiceVertice ]->next;
+           count = count + 1;
+    }
+    if( count < ( graph->numeroVertici - 1 ) ) return 0;
+  }
+  return 1;
 }
 
 void rimuoviLato( Grafo** graph, int verticeSrc, int verticeDst ) {
@@ -155,9 +228,18 @@ void rimuoviLato( Grafo** graph, int verticeSrc, int verticeDst ) {
     }
 
     if( currentPtr != NULL ) {
-      delete = currentPtr;
-      previousPtr->next = currentPtr->next;
-      free( delete );
-      return;
+       delete = currentPtr;
+       previousPtr->next = currentPtr->next;
+       free( delete );
+       return;
     }
+}
+
+int verificaCicli( Grafo* graph, int lato ) {
+
+    int vertice = graph->numeroVertici;
+
+    if( lato == vertice - 1 ) return 1;
+    return 0;
+
 }
