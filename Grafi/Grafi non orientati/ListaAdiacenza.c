@@ -19,13 +19,7 @@ Grafo* creaLista( int vertice, int lato );
 void stampaLista( Grafo* graph );
 void insert( Grafo** graph , int key, int vertice );
 ListAdiacenza* creaNodo( int key );
-int visualizzaGrado( Grafo* graph, int vertice );
-int verificaAdiacenzaVertici( Grafo* graph, int verticeSrc, int verticeDst );
-void aggiuntiVertice( Grafo** graph );
-int aggiungiLato( Grafo* graph, int verticeSrc, int verticeDst );
 void rimuoviLato( Grafo** graph, int verticeSrc, int verticeDst );
-void rimuoviVertice( Grafo* graph, int vertice );
-int grafoCompleto( Grafo* graph );
 int verificaCicli( Grafo* graph, int lato );
 void insertTesta( ListAdiacenza* nodePtr, ListAdiacenza** vertice );
 int isDuplicate( ListAdiacenza* nodePtr, int key );
@@ -136,77 +130,6 @@ void stampaLista( Grafo* graph ) {
             puts( "" );
       }
   }
-}
-
-int visualizzaGrado( Grafo* graph, int vertice ) {
-
-  ListAdiacenza* verticeNodo = graph->summit[ vertice ];
-  int count = 0;
-
-  while( verticeNodo != NULL ) {
-    count = count + 1;
-    verticeNodo = verticeNodo->next;
-  }
-  return count;
-}
-
-int verificaAdiacenzaVertici( Grafo* graph, int verticeSrc, int verticeDst ) {
-
-  ListAdiacenza* verticeS = graph->summit[ verticeSrc ];
-
-  while( verticeS != NULL ) {
-    if( verticeS->key == verticeDst ) return 1;
-    verticeS = verticeS->next;
-  }
-  return 0;
-}
-
-void aggiuntiVertice( Grafo** graph ) {
-
-    ListAdiacenza** grafo = ( *graph )->summit;
-
-    ( *graph )->numeroVertici++;
-    grafo = ( ListAdiacenza** )realloc( grafo, ( *graph )->numeroVertici * sizeof( ListAdiacenza* ) );
-
-}
-
-int aggiungiLato( Grafo* graph, int verticeSrc, int verticeDst ) {
-
-    ListAdiacenza* verticeS = graph->summit[ verticeSrc ];
-    ListAdiacenza* newPtr = NULL;
-
-    while( verticeS != NULL ) {
-      if( verticeS->key == verticeDst ) return 0;
-      verticeS = verticeS->next;
-    }
-
-    newPtr = creaNodo( verticeDst );
-    newPtr->next = graph->summit[ verticeSrc ];
-    graph->summit[ verticeSrc ] = newPtr;
-
-    return 1;
-
-}
-
-void rimuoviVertice( Grafo* graph, int vertice ) {
-
-     graph->summit[ vertice ] = NULL;
-     graph->summit[ vertice ];
-     free( graph->summit[ vertice ] );
-}
-
-int grafoCompleto( Grafo* graph ) {
-
-  int count = 0;
-
-  for( int indiceVertice = 0; indiceVertice < graph->numeroVertici; indiceVertice++ ) {
-    while( graph->summit[ indiceVertice ] != NULL ) {
-           graph->summit[ indiceVertice ] = graph->summit[ indiceVertice ]->next;
-           count = count + 1;
-    }
-    if( count < ( graph->numeroVertici - 1 ) ) return 0;
-  }
-  return 1;
 }
 
 void rimuoviLato( Grafo** graph, int verticeSrc, int verticeDst ) {
