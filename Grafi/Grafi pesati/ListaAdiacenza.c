@@ -21,7 +21,7 @@ void insert( Grafo** graph, int key, int vertice );
 void stampaLista( Grafo* graph );
 ListAdiacenza* creaNodo( int key, int peso );
 void riempiLista( Grafo* graph, int lato, int vertice );
-int isDuplicate( ListAdiacenza* nodePtr, int key, int vertice );
+int isDuplicate( ListAdiacenza* nodePtr, int key );
 void insertTesta( ListAdiacenza* nodePtr, ListAdiacenza** vertice );
 void rimuoviLato( Grafo** graph, int verticeSrc, int verticeDst );
 
@@ -50,7 +50,7 @@ void insertTesta( ListAdiacenza* nodePtr, ListAdiacenza** vertice ) {
 }
 
 
-int isDuplicate( ListAdiacenza* nodePtr, int key, int vertice ) {
+int isDuplicate( ListAdiacenza* nodePtr, int key ) {
 
   while( nodePtr != NULL ) {
     if( nodePtr->key == key ) {
@@ -96,7 +96,7 @@ void insert( Grafo** graph, int key, int vertice ) {
 
   peso = ( rand() % 20 ) + 1;
 
-  if( isDuplicate( list[ vertice ], vertice, key ) ) {
+  if( isDuplicate( list[ vertice ], key ) ) {
       rimuoviLato( graph, vertice, key );
       rimuoviLato( graph, key, vertice );
   }
