@@ -6,6 +6,7 @@ void creaMatrice( int*** grafo, int numVertice );
 void inizializza( int** grafo, int numVertice );
 void stampaMatrice( int** grafo, int numVertice );
 void riempiMatrice( int** grafo, int numLato, int numVertice );
+int verificaCicli( int numLato, int numVertice );
 
 int main( void ) {
 
@@ -87,4 +88,10 @@ void riempiMatrice( int** grafo, int numLato, int numVertice ) {
       }
       indice = indice + 1;
   }
+}
+
+int verificaCicli( int numLato, int numVertice ) {
+
+  if( numLato == numVertice - 1 ) return 1;
+  return 0;
 }
