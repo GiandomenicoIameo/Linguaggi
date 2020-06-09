@@ -24,7 +24,8 @@ int verificaCicli( Grafo* graph, int lato );
 void insertTesta( ListAdiacenza* nodePtr, ListAdiacenza** vertice );
 int isDuplicate( ListAdiacenza* nodePtr, int key );
 int verificaVertici( Grafo* graph, int verticeSrc );
-void visitaInAmpiezza( Grafo* graph, int verticeSrc, int* arrayVisite );
+void visitaInProfondita( Grafo* graph, int verticeSrc, int* arrayVisite );
+void visita( Grafo* graph, int verticeSrc, int* arrayVisite );
 
 int main( void ) {
 
@@ -52,7 +53,7 @@ int main( void ) {
   puts( "" );
   stampaLista( graph );
   puts( "" );
-  visitaInAmpiezza( graph, 0, arrayVisite );
+  visitaInProfondita( graph, 0, arrayVisite );
 
   return 0;
 }
@@ -183,19 +184,29 @@ int ricercaVertici( Grafo* graph, int verticeSrc ) {
     return -1;
 }
 
-void visitaInAmpiezza( Grafo* graph, int verticeSrc, int* arrayVisite ) {
+void visitaInProfondita( Grafo* graph, int verticeSrc, int* arrayVisite ) {
 
-  int esistenzaElementi;
+  int verticeNonVuoto;
 
-  esistenzaElementi = ricercaVertici( graph, verticeSrc );
-  if( esistenzaElementi != -1 ) {
-
-      arrayVisite[ verticeSrc ] = 1;
-      printf( "%d\n", verticeSrc );
+  verticeNonVuoto = ricercaVertici( graph, verticeSrc );
+  if( verticeNonVuoto != -1 )
+      visita( graph, verticeNonVuoto, arrayVisite );
+  else {
       while( graph->summit[ verticeSrc ] != NULL ) {
-         if( !arrayVisite[ graph->summit[ verticeSrc ]->key ] )
-              visitaInAmpiezza( graph, graph->summit[ verticeSrc ]->key, arrayVisite );
-         graph->summit[ verticeSrc ] = graph->summit[ verticeSrc ]->next;
+          verticeNonVuoto = ricercaVertici( graph, graph->summit[ verticeSrc ]->key );
+          if( verticeNonVuoto != -1 )
+              visita( graph, verticeNonVuoto, arrayVisite );
+          graph->summit[ verticeSrc ] = graph->summit[ verticeSrc ]->next;
       }
    }
+}
+
+void visita( Grafo* graph, int verticeSrc, int* arrayVisite ) {
+
+     arrayVisite[ verticeSrc ] = 1;
+     while( graph->summit[ verticeSrc ] != NULL ) {
+         if( !arrayVisite[ graph->summit[ verticeSrc ]->key ] )
+             visitaInProfondita( graph, graph->summit[ verticeSrc ]->key, arrayVisite );
+         graph->summit[ verticeSrc ] = graph->summit[ verticeSrc ]->next;
+     }
 }
