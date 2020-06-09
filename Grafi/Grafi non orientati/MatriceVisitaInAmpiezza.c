@@ -24,7 +24,6 @@ int main( void ) {
 
   int** grafo;
   int numVertice, numLato;
-  int totLati;
   Nodo_Coda* Testa = NULL;
 
   do {
