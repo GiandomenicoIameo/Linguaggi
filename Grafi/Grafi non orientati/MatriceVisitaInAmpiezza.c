@@ -64,7 +64,6 @@ Nodo_Coda* creaNodo( int dato ) {
 void insert( Nodo_Coda** Testa, int dato ) {
 
   Nodo_Coda* tempPtr = NULL;
-  int indice = 0;
 
   if( *Testa == NULL ) {
       *Testa = creaNodo( dato );
