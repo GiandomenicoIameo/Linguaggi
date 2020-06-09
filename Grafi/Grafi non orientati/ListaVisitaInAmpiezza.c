@@ -242,7 +242,7 @@ void inserimentoAdiacenze( Coda** Testa, Grafo* graph, int verticeSrc, int* arra
 int verificaVertici( Grafo* graph, int verticeSrc ) {
 
     while( graph->summit[ verticeSrc ] != NULL ) {
-         if( graph->summit[ verticeSrc ] ) {
+         if( graph->summit[ verticeSrc ]->next ) {
              return 1;
          }
          graph->summit[ verticeSrc ] = graph->summit[ verticeSrc ]->next;
