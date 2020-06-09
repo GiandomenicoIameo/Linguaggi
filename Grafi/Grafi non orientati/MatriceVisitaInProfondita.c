@@ -9,6 +9,7 @@ void riempiMatrice( int** grafo, int numLato, int numVertice );
 int verificaCicli( int numLato, int numVertice );
 int verificaVertici( int** grafo, int numVertice, int verticeSrc );
 void visitaProfondita( int** grafo, int numVertice, int verticeSrc, int* arrayVisite );
+void visita( int** grafo, int numVertice, int verticeSrc, int* arrayVisite );
 
 int main( void ) {
 
@@ -103,25 +104,13 @@ int verificaCicli( int numLato, int numVertice ) {
 
 void visitaProfondita( int** grafo, int numVertice, int verticeSrc, int* arrayVisite ) {
 
-  if( verificaVertici( grafo, numVertice, verticeSrc ) ) {
-    arrayVisite[ verticeSrc ] = 1;
-    for( int indice = 0; indice < numVertice; indice++ ) {
-        if( grafo[ verticeSrc ][ indice ] && !arrayVisite[ indice ] )
-            visitaProfondita( grafo, numVertice, indice, arrayVisite );
-    }
-  }
-
+  if( verificaVertici( grafo, numVertice, verticeSrc ) )
+      visita( grafo, numVertice, verticeSrc, arrayVisite );
 else {
-
     for( int indice = 0; indice < numVertice; indice++ ) {
         if( verificaVertici( grafo, numVertice, indice ) ) {
-
-          arrayVisite[ verticeSrc ] = 1;
-          for( int indice = 0; indice < numVertice; indice++ ) {
-              if( grafo[ verticeSrc ][ indice ] && !arrayVisite[ indice ] )
-                  visitaProfondita( grafo, numVertice, indice, arrayVisite );
-          }
-          break;
+            visita( grafo, numVertice, verticeSrc, arrayVisite );
+            break;
         }
     }
   }
@@ -133,4 +122,13 @@ int verificaVertici( int** grafo, int numVertice, int verticeSrc ) {
         if( grafo[ verticeSrc ][ indiceCol ] ) return 1;
   }
     return 0;
+}
+
+void visita( int** grafo, int numVertice, int verticeSrc, int* arrayVisite ) {
+
+      arrayVisite[ verticeSrc ] = 1;
+      for( int indice = 0; indice < numVertice; indice++ ) {
+            if( grafo[ verticeSrc ][ indice ] && !arrayVisite[ indice ] )
+                visitaProfondita( grafo, numVertice, indice, arrayVisite );
+      }
 }
