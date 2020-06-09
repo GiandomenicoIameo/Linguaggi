@@ -242,7 +242,7 @@ void inserimentoAdiacenze( Coda** Testa, Grafo* graph, int verticeSrc, int* arra
 int verificaVertici( Grafo* graph, int verticeSrc ) {
 
     while( graph->summit[ verticeSrc ] != NULL ) {
-         if( graph->summit[ verticeSrc ]->next ) {
+         if( graph->summit[ verticeSrc ] ) {
              return 1;
          }
          graph->summit[ verticeSrc ] = graph->summit[ verticeSrc ]->next;
@@ -269,6 +269,7 @@ void visitaInAmpiezza( Grafo* graph, int numVertice, int verticeSrc, Coda** Test
 
   while( *Testa != NULL ) {
     if( arrayVisite[ ( *Testa )->dato ] == 2 ) {
+      printf( "%d\n", ( *Testa )->dato );
       removeCoda( Testa );
     }
     else if( arrayVisite[ ( *Testa )->dato ] == 1 ) {
