@@ -7,7 +7,7 @@ void inizializza( int** grafo, int numVertice );
 void stampaMatrice( int** grafo, int numVertice );
 void riempiMatrice( int** grafo, int numLato, int numVertice );
 int verificaCicli( int numLato, int numVertice );
-int verificaVertici( int** grafo, int numVertice, int verticeSrc );
+int ricercaVertici( int** grafo, int numVertice, int verticeSrc );
 void visitaProfondita( int** grafo, int numVertice, int verticeSrc, int* arrayVisite );
 void visita( int** grafo, int numVertice, int verticeSrc, int* arrayVisite );
 
@@ -40,6 +40,8 @@ int main( void ) {
   riempiMatrice( grafo, numLato, numVertice );
   stampaMatrice( grafo, numVertice );
   visitaProfondita( grafo, numVertice, 0, arrayVisite );
+
+  free( arrayVisite );
 
   return 0;
 }
@@ -102,26 +104,26 @@ int verificaCicli( int numLato, int numVertice ) {
   return 0;
 }
 
-void visitaProfondita( int** grafo, int numVertice, int verticeSrc, int* arrayVisite ) {
-
-  if( verificaVertici( grafo, numVertice, verticeSrc ) )
-      visita( grafo, numVertice, verticeSrc, arrayVisite );
-else {
-    for( int indice = 0; indice < numVertice; indice++ ) {
-        if( verificaVertici( grafo, numVertice, indice ) ) {
-            visita( grafo, numVertice, verticeSrc, arrayVisite );
-            break;
-        }
-    }
-  }
-}
-
-int verificaVertici( int** grafo, int numVertice, int verticeSrc ) {
+int ricercaVertici( int** grafo, int numVertice, int verticeSrc ) {
 
   for( int indiceCol = 0; indiceCol < numVertice; indiceCol++ ) {
-        if( grafo[ verticeSrc ][ indiceCol ] ) return 1;
+        if( grafo[ verticeSrc ][ indiceCol ] ) return verticeSrc;
   }
-    return 0;
+    return -1;
+}
+
+void visitaProfondita( int** grafo, int numVertice, int verticeSrc, int* arrayVisite ) {
+
+  int verticeColorato;
+
+  verticeColorato = ricercaVertici( grafo, numVertice, verticeSrc );
+  if( verticeColorato != -1 ) visita( grafo, numVertice, verticeColorato, arrayVisite );
+  else {
+    for( int indice = 0; indice < numVertice; indice++ ) {
+        verticeColorato = ricercaVertici( grafo, numVertice, indice );
+        if( verticeColorato != -1 ) visita( grafo, numVertice, verticeColorato, arrayVisite );
+    }
+  }
 }
 
 void visita( int** grafo, int numVertice, int verticeSrc, int* arrayVisite ) {
