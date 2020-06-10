@@ -40,8 +40,6 @@ int main( void ) {
   stampaMatrice( grafo, numVertice );
   visita( grafo, numVertice, arrayVisite );
 
-  free( arrayVisite );
-
   return 0;
 }
 
@@ -123,4 +121,5 @@ void visita( int** grafo, int numVertice, int* arrayVisite ) {
              colorazioneVerticiAdiacenti( grafo, numVertice, indice, arrayVisite );
          }
   }
+  free( arrayVisite );
 }
