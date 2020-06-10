@@ -118,7 +118,9 @@ void visita( int** grafo, int numVertice, int* arrayVisite ) {
   for( int indice = 0; indice < numVertice; indice++ ) {
          if( arrayVisite[ indice ] )
              continue;
-         arrayVisite[ indice ] = 1;
-         colorazioneVerticiAdiacenti( grafo, numVertice, indice, arrayVisite );
+         else {
+             arrayVisite[ indice ] = 1;
+             colorazioneVerticiAdiacenti( grafo, numVertice, indice, arrayVisite );
+         }
   }
 }
