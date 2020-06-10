@@ -8,7 +8,7 @@ void stampaMatrice( int** grafo, int numVertice );
 void riempiMatrice( int** grafo, int numLato, int numVertice );
 int verificaCicli( int numLato, int numVertice );
 void colorazioneVerticiAdiacenti( int** grafo, int numVertice, int verticeSrc, int* arrayVisite );
-void visitaAmpiezza( int** grafo, int numVertice, int* arrayVisite );
+void visita( int** grafo, int numVertice, int* arrayVisite );
 
 int main( void ) {
 
@@ -38,7 +38,7 @@ int main( void ) {
   inizializza( grafo, numVertice );
   riempiMatrice( grafo, numLato, numVertice );
   stampaMatrice( grafo, numVertice );
-  visitaAmpiezza( grafo, numVertice, arrayVisite );
+  visita( grafo, numVertice, arrayVisite );
 
   free( arrayVisite );
 
@@ -113,7 +113,7 @@ void colorazioneVerticiAdiacenti( int** grafo, int numVertice, int verticeSrc, i
     }
 }
 
-void visitaAmpiezza( int** grafo, int numVertice, int* arrayVisite ) {
+void visita( int** grafo, int numVertice, int* arrayVisite ) {
 
   for( int indice = 0; indice < numVertice; indice++ ) {
          if( arrayVisite[ indice ] )
