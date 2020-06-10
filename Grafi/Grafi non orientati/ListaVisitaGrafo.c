@@ -194,4 +194,5 @@ void visita( Grafo* graph, int numVertice, int verticeSrc, int* arrayVisite ) {
                colorazioneVertici( graph, indice, arrayVisite );
            }
       }
+      free( arrayVisite );
 }
