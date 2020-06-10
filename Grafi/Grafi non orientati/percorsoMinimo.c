@@ -33,7 +33,6 @@ int main( void ) {
 
   int** grafo;
   int* arrayVisite;
-  int a;
   int numVertice, numLato, totLati;
   Nodo_Coda* Testa = NULL;
   int* predecessori;
@@ -67,13 +66,7 @@ int main( void ) {
   puts( "" );
 
   visitaInAmpiezza( grafo, numVertice, 0, &Testa, predecessori );
-  printf( "Inserisci vertice sorgente : " );
-  scanf( "%d", &totLati );
-  printf( "Inserisci vertice destinazione : " );
-  scanf( "%d", &a );
-
-  stampaPercorso( totLati, a, predecessori );
-
+  
   return 0;
 }
 
