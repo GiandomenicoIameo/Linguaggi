@@ -12,41 +12,32 @@ struct Grafo {
   struct ListAdiacenza** summit;
 };
 
-struct Coda {
-  int dato;
-  struct Coda* next;
-};
-
-typedef struct Coda Coda;
 typedef struct Grafo Grafo;
 typedef struct ListAdiacenza ListAdiacenza;
 
 Grafo* creaLista( int vertice, int lato );
 void stampaLista( Grafo* graph );
 void insert( Grafo** graph , int key, int vertice );
-Coda* creaNodoCoda( int dato );
-void insertCoda( Coda** Testa, int dato );
-void removeCoda( Coda** Testa );
 ListAdiacenza* creaNodo( int key );
 void rimuoviLato( Grafo** graph, int verticeSrc, int verticeDst );
 int verificaCicli( Grafo* graph, int lato );
 void insertTesta( ListAdiacenza* nodePtr, ListAdiacenza** vertice );
 int isDuplicate( ListAdiacenza* nodePtr, int key );
-void inserimentoAdiacenze( Coda** Testa, Grafo* graph, int verticeSrc, int* arrayVisite );
-int verificaVertici( Grafo* graph, int verticeSrc );
-void visitaInAmpiezza( Grafo* graph, int numVertice, int verticeSrc, Coda** Testa );
+void colorazioneVertici( Grafo* graph, int verticeSrc, int* arrayVisite );
+void visita( Grafo* graph, int numVertice, int verticeSrc, int* arrayVisite );
 
 int main( void ) {
 
   Grafo* graph = NULL;
-  Coda* Testa = NULL;
-  int vertice, lato, nodoDestinazione, randomVertice, grado;
+  int vertice, lato, nodoDestinazione, randomVertice;
+  int* arrayVisite;
 
   printf( "Inserisci numero vertici : " );
   scanf( "%d", &vertice );
   printf( "Inserisci numero lati : " );
   scanf( "%d", &lato );
 
+  arrayVisite = ( int* )calloc( vertice, sizeof( int ) );
   graph = creaLista( vertice, lato );
   srand( time( NULL ) );
 
@@ -61,7 +52,7 @@ int main( void ) {
   puts( "" );
   stampaLista( graph );
   puts( "" );
-  visitaInAmpiezza( graph, vertice, 0, &Testa );
+  visita( graph, vertice, 0, arrayVisite );
 
   return 0;
 }
@@ -127,48 +118,6 @@ void insert( Grafo** graph, int key, int vertice ) {
  }
 }
 
-Coda* creaNodoCoda( int dato ) {
-
-  Coda* newPtr = ( Coda* )malloc( sizeof( Coda ) );
-  newPtr->dato = dato;
-  newPtr->next = NULL;
-
-  return newPtr;
-}
-
-void insertCoda( Coda** Testa, int dato ) {
-
-  Coda* tempPtr = NULL;
-
-  if( *Testa == NULL ) {
-      *Testa = creaNodoCoda( dato );
-  }
-  else {
-
-    tempPtr = *Testa;
-    while( tempPtr->next != NULL ) {
-      tempPtr = tempPtr->next;
-    }
-    tempPtr->next = creaNodoCoda( dato );
-  }
-}
-
-
-void removeCoda( Coda** Testa ) {
-
-  Coda* deletePtr = NULL;
-  int value;
-
-  if( *Testa == NULL ) {
-    return;
-  }
-  else {
-    deletePtr = *Testa;
-    *Testa = ( *Testa )->next;
-    free( deletePtr );
-  }
-}
-
 void stampaLista( Grafo* graph ) {
 
   ListAdiacenza* vertice = NULL;
@@ -223,59 +172,26 @@ int verificaCicli( Grafo* graph, int lato ) {
 
 }
 
-void inserimentoAdiacenze( Coda** Testa, Grafo* graph, int verticeSrc, int* arrayVisite ) {
+void colorazioneVertici( Grafo* graph, int verticeSrc, int* arrayVisite ) {
 
-  if( arrayVisite[ verticeSrc ] == 0 ) {
-    insertCoda( Testa, verticeSrc );
-    arrayVisite[ verticeSrc ] = 2; // nodo colorato di nero perché verranno inseriti in Coda
-    // i vertici adiacenti
+  ListAdiacenza* vertice = graph->summit[ verticeSrc ];
+
+  while( vertice != NULL && !arrayVisite[ vertice->key ]  ) {
+         arrayVisite[ vertice->key ] = 1;
+         vertice = vertice->next;
   }
-    while( graph->summit[ verticeSrc ] != NULL ) {
-        if( !arrayVisite[ graph->summit[ verticeSrc ]->key ] ) {
-          insertCoda( Testa, graph->summit[ verticeSrc ]->key );
-          arrayVisite[ graph->summit[ verticeSrc ]->key ] = 1; // nodi colorati di grigio
-        }
-        graph->summit[ verticeSrc ] = graph->summit[ verticeSrc ]->next;
-    }
 }
 
-int verificaVertici( Grafo* graph, int verticeSrc ) {
+void visita( Grafo* graph, int numVertice, int verticeSrc, int* arrayVisite ) {
 
-    while( graph->summit[ verticeSrc ] != NULL ) {
-         if( graph->summit[ verticeSrc ] ) {
-             return 1;
-         }
-         graph->summit[ verticeSrc ] = graph->summit[ verticeSrc ]->next;
-    }
-    return 0;
-}
+      ListAdiacenza** vertice = graph->summit;
 
-void visitaInAmpiezza( Grafo* graph, int numVertice, int verticeSrc, Coda** Testa ) {
-
-  Coda* tempPtr = *Testa;
-  int* arrayVisite = ( int* )calloc( numVertice, sizeof( int ) );
-  int esistenzaElementi;
-
-  if( verificaVertici( graph, verticeSrc ) )
-      inserimentoAdiacenze( Testa, graph, verticeSrc, arrayVisite );
-  else {
-    for( int indice = 0; indice < graph->numeroVertici; indice++ ) {
-         if( verificaVertici( graph, indice ) ) {
-             inserimentoAdiacenze( Testa, graph, indice, arrayVisite );
-             break;
+      for( int indice = 0; indice < graph->numeroVertici; indice++ ) {
+           if( arrayVisite[ indice ] )
+               continue;
+           else {
+               arrayVisite[ indice ] = 1;
+               colorazioneVertici( graph, indice, arrayVisite );
+           }
       }
-    }
-  }
-
-  while( *Testa != NULL ) {
-    if( arrayVisite[ ( *Testa )->dato ] == 2 ) {
-      printf( "%d\n", ( *Testa )->dato );
-      removeCoda( Testa );
-    }
-    else if( arrayVisite[ ( *Testa )->dato ] == 1 ) {
-      arrayVisite[ ( *Testa )->dato ] = 2;
-      inserimentoAdiacenze( Testa, graph, ( *Testa )->dato, arrayVisite );
-    }
-  }
-  free( arrayVisite );
 }
