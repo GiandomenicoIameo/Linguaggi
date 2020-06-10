@@ -7,13 +7,6 @@ struct Nodo_Coda {
   struct Nodo_Coda* next;
 };
 
-struct treeNode {
-  struct treeNode* leftPtr;
-  int dato;
-  struct treeNode* rightPtr;
-};
-
-typedef struct treeNode treeNode;
 typedef struct Nodo_Coda Nodo_Coda;
 
 Nodo_Coda* creaNodo( int dato );
