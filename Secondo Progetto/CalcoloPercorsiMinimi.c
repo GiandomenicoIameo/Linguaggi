@@ -34,7 +34,6 @@ int removeCoda( Coda** Testa );
 void removeNodo( Coda** Testa, int vertice );
 Grafo* creaLista( int vertice, int lato );
 void insert( Grafo** graph , int vertice, int numVertice, char** citta );
-void stampaLista( Grafo* graph, char** citta );
 void rimuoviLato( Grafo** graph, int verticeSrc, int verticeDst );
 ListAdiacenza* creaNodo( int vertice, int peso, char* citta );
 void insertTesta( ListAdiacenza* nodePtr, ListAdiacenza** vertice );
@@ -264,26 +263,6 @@ void removeNodo( Coda** Testa, int vertice ) {
         free( deletePtr );
      }
    }
-}
-
-void stampaLista( Grafo* graph, char** citta ) {
-
-  ListAdiacenza* tempTesta = NULL;
-
-  for( int indiceVertice = 0; indiceVertice < graph->numeroVertici; indiceVertice++ ) {
-       tempTesta = graph->summit[ indiceVertice ];
-       if( tempTesta == NULL ) {
-           printf( "%s -->\n", citta[ indiceVertice ] );
-       }
-       else {
-            printf( "%s --> ", citta[ indiceVertice ] );
-            while( tempTesta != NULL ) {
-                  printf( "[ %s %d km ]", tempTesta->citta, tempTesta->peso );
-                  tempTesta = tempTesta->next;
-            }
-            puts( "" );
-      }
-  }
 }
 
 void rimuoviLato( Grafo** graph, int verticeSrc, int verticeDst ) {
