@@ -235,7 +235,7 @@ void AggiornaNodo( Coda** Testa, int vertice, int distanze ) {
 
      Coda* tempTesta = *Testa;
 
-     while( tempTesta->next != NULL ) {
+     while( tempTesta != NULL ) {
         if( tempTesta->vertice == vertice ) {
             tempTesta->distanza = distanze;
             break;
