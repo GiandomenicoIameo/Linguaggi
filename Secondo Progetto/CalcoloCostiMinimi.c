@@ -372,7 +372,7 @@ void stampaPercorsoMinimo( int verticeDst, int verticeSrc, int* predecessori, ch
     }
 }
 
-void stampaArray( int* array, int size, int verticeDst ) {
+int stampaArray( int* array, int size, int verticeDst ) {
 
    for( int indice = 0; indice < size; indice++ ) {
         if( verticeDst == indice ) {
