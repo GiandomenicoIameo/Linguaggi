@@ -79,19 +79,6 @@ void creaMatrice( int*** grafo, int numVertice ) {
   }
 }
 
-void stampaCosti( int** costi, int numVertice ) {
-
-     for( int indiceRow = 0; indiceRow < numVertice; indiceRow++ ) {
-        for( int indiceCol = 0; indiceCol < numVertice; indiceCol++ ) {
-          if( costi[ indiceRow ][ indiceCol ] == INF )
-              printf( "INF " );
-         else
-             printf( "%d ", costi[ indiceRow ][ indiceCol ] );
-        }
-        puts( "" );
-     }
-}
-
 void inizializza( int** grafo, int numVertice ) {
 
   for( int indiceRow = 0; indiceRow < numVertice; indiceRow++ ) {
