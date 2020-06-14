@@ -43,7 +43,7 @@ void calcoloDistanza( Coda** Testa, Grafo* graph, int verticeSrc, int* distanze,
 void algoritmoDijkstra( Coda** Testa, Grafo* graph, int verticeSrc, int* distanze, int* predecessori );
 void inserimentoAdiacenze( Coda** Testa, Grafo* graph, int verticeSrc, int* distanze, int* predecessori );
 void AggiornaNodo( Coda** Testa, int vertice, int distanze );
-void stampaArray( int* array, int size, int verticeDst );
+int stampaArray( int* array, int size, int verticeDst );
 void stampaPercorsoMinimo( int verticeDst, int verticeSrc, int* predecessori, char** citta, int* distanze );
 int ricercaMeta( char** citta, char* meta );
 void buffer( void );
@@ -377,9 +377,9 @@ void stampaArray( int* array, int size, int verticeDst ) {
    for( int indice = 0; indice < size; indice++ ) {
         if( verticeDst == indice ) {
             if( array[ indice ] == INF )
-                 puts( "Non esiste tratta" );
+                 return -1;
             else
-                printf( "%d€\n", array[ indice ] );
+                return array[ indice ];
         }
    }
 }
