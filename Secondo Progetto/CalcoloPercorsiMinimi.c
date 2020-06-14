@@ -4,10 +4,11 @@
 #include <string.h>
 
 #define INF 9999999
+#define vertici 20
 
 struct ListAdiacenza {
   int vertice;
-  char citta[ 20 ];
+  char citta[ vertici ];
   int peso;
   struct ListAdiacenza* next;
 };
@@ -18,7 +19,7 @@ struct Grafo {
 };
 
 struct Coda {
-  char citta[ 20 ];
+  char citta[ vertici ];
   int vertice;
   int distanza;
   struct Coda* next;
@@ -37,13 +38,13 @@ void insert( Grafo** graph , int vertice, int numVertice, char** citta );
 void rimuoviLato( Grafo** graph, int verticeSrc, int verticeDst );
 ListAdiacenza* creaNodo( int vertice, int peso, char* citta );
 void insertTesta( ListAdiacenza* nodePtr, ListAdiacenza** vertice );
-int isDuplicate( ListAdiacenza* nodePtr, int key );
+int isDuplicate( ListAdiacenza* nodePtr, int vertice );
 void calcoloDistanza( Coda** Testa, Grafo* graph, int verticeSrc, int* distanze, int* predecessori );
 void algoritmoDijkstra( Coda** Testa, Grafo* graph, int verticeSrc, int* distanze, int* predecessori );
 void inserimentoAdiacenze( Coda** Testa, Grafo* graph, int verticeSrc, int* distanze, int* predecessori );
 void AggiornaNodo( Coda** Testa, int vertice, int distanze );
-void stampaPercorsoMinimo( int verticeDst, int verticeSrc, int* predecessori, char** citta, int* distanze );
 void stampaArray( int* array, int size, int verticeDst );
+void stampaPercorsoMinimo( int verticeDst, int verticeSrc, int* predecessori, char** citta, int* distanze );
 int ricercaMeta( char** citta, char* meta );
 void buffer( void );
 
@@ -53,30 +54,25 @@ int main( void ) {
   Coda* Testa = NULL;
   int* predecessori, *distanze;
   int verticePartenza, verticeDestinazione, nodoDestinazione, randomVertice, grado;
-  char partenza[ 20 ], destinazione[ 20 ];
-  char* nomeCitta[ 20 ] = { "Napoli", "Roma", "Trapani", "Palermo", "Catania", "Messina", "Taranto", "Lamezia", "Bari", "Pescara", "Ancona",
-                            "Cagliari", "Cibia", "Firenze", "Bologna", "Genova", "Milano", "Torino", "Venezia", "Trieste" } ;
+  char partenza[ vertici ], destinazione[ vertici ];
+  char* nomeCitta[ vertici ] = { "Napoli", "Roma", "Trapani", "Palermo", "Catania", "Messina", "Taranto", "Lamezia", "Bari", "Pescara", "Ancona",
+                                 "Cagliari", "Cibia", "Firenze", "Bologna", "Genova", "Milano", "Torino", "Venezia", "Trieste" } ;
 
-  graph = creaLista( 20, 20 );
+  graph = creaLista( vertici, vertici );
   srand( time( NULL ) );
-  predecessori = ( int* )calloc( 20, sizeof( int ) );
-  distanze = ( int* )calloc( 20, sizeof( int ) );
+  predecessori = ( int* )calloc( vertici, sizeof( int ) );
+  distanze = ( int* )calloc( vertici, sizeof( int ) );
 
-  for( int indice = 0; indice < 20; indice++ ) {
+  for( int indice = 0; indice < vertici; indice++ ) {
      distanze[ indice ] = INF;
      predecessori[ indice ] = -1;
   }
 
-  for( int indice = 0; indice < 20; indice++ ) {
+  for( int indice = 0; indice < vertici; indice++ ) {
 
-    nodoDestinazione = rand() % 20;
+    nodoDestinazione = rand() % vertici;
     insert( &graph, indice, nodoDestinazione, nomeCitta );
   }
-
-  puts( "" );
-  stampaLista( graph, nomeCitta );
-  puts( "" );
-  puts( "" );
 
   printf( "Scegli partenza : " );
   scanf( "%s", partenza );
@@ -88,7 +84,7 @@ int main( void ) {
   verticeDestinazione = ricercaMeta( nomeCitta, destinazione );
 
   algoritmoDijkstra( &Testa, graph, verticePartenza, distanze, predecessori );
-  puts( "" );
+  printf( "La tratta più con i relativi scali è : " );
   stampaPercorsoMinimo( verticeDestinazione, verticePartenza, predecessori, nomeCitta, distanze );
   puts( "" );
 
@@ -103,7 +99,7 @@ int ricercaMeta( char** citta, char* meta ) {
 
     int value;
 
-    for( int indice = 0; indice < 20; indice++ ) {
+    for( int indice = 0; indice < vertici; indice++ ) {
          value = strcmp( citta[ indice ], meta );
 
          if( !value )
@@ -165,7 +161,7 @@ void insert( Grafo** graph, int vertice, int numVertice, char** citta ) {
 
  if( vertice == numVertice ) return;
 
- peso = ( rand() % 20 ) + 1;
+ peso = ( rand() % vertici ) + 1;
 
  if( isDuplicate( list[ vertice ], numVertice ) ) {
      rimuoviLato( graph, vertice, numVertice );
@@ -361,16 +357,16 @@ void algoritmoDijkstra( Coda** Testa, Grafo* graph, int verticeSrc, int* distanz
 void stampaPercorsoMinimo( int verticeDst, int verticeSrc, int* predecessori, char** citta, int* distanze ) {
 
      if( distanze[ verticeDst ] == INF ) {
-         puts( "Non esistono tratte" );
+         puts( "NULL" );
          return;
      }
 
      if( predecessori[ verticeDst ] == verticeSrc ) {
-         printf( "%s", citta[ verticeSrc ] );
+         printf( " %s", citta[ verticeSrc ] );
          return;
      }
      else {
-        printf( "%s > ", citta[ verticeDst ] );
+        printf( "%s < ", citta[ verticeDst ] );
         stampaPercorsoMinimo( predecessori[ verticeDst ], verticeSrc, predecessori, citta, distanze );
     }
 }
