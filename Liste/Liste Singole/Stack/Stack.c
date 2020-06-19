@@ -3,94 +3,106 @@
 
 struct StackNode{
   int dato;
-  struct StackNode* nextPtr;
+  struct StackNode* next;
 };
 
-void StackPush( struct StackNode** topPtr, int value );
-int StackPop( struct StackNode** topPtr );
-void printfStack( struct StackNode* topPtr );
+typedef struct StackNode StackNode;
+
+StackNode* CreaNodo_SL( int value );
+void StackPush( StackNode** topPtr, int value );
+void StackPop( StackNode** topPtr );
+void StampaStack( StackNode* topPtr );
+void instructions( void );
 
 int main( void ){
 
-  struct StackNode* stackPtr = NULL;
-  unsigned int choice;
-  int value;
-  int a;
+  StackNode* stackPtr = NULL;
+  int choice;
+  int dato;
 
-  printf( "\nSeleziona operazione 1 = Push, 2 = Pop : " );
+  instructions();
   scanf( "%d", &choice );
 
-while( choice > 0 || choice < 3 ) {
+  while( choice != 3 ) {
 
-  switch( choice ) {
+    switch( choice ) {
 
-    case 1 :
+      case 1 :
+         printf( "Valore del nodo : " );
+         scanf( "%d", &dato );
+         StackPush( &stackPtr, dato );
+         StampaStack( stackPtr );
+         break;
+     case 2 :
+         if( !stackPtr ) {
+             puts( "Lo Stack è vuoto. " );
+             break;
+         }
+         StackPop( &stackPtr );
+         StampaStack( stackPtr );
+         break;
+     default :
+         printf( "Numero non valido\n" );
+         break;
+   }
 
-        printf( "Valore del nodo : " );
-        scanf( "%d", &value );
-        StackPush( &stackPtr, value );
-        printfStack( stackPtr );
-        break;
-
-    case 2 :
-
-        StackPop( &stackPtr );
-        printfStack( stackPtr );
-
-        break;
-
-    default :
-        printf( "Numero non valido\n" );
-        break;
-  }
-
-  printf( "\nOperazione ? " );
-  scanf( "%d", &choice );
-}
+   printf( "\nOperazione ? " );
+   scanf( "%d", &choice );
+ }
 
   return 0;
 }
 
-void StackPush( struct StackNode** topPtr, int value ) {
+void instructions( void ) {
 
-     struct StackNode* newPtr;
-     newPtr = malloc( sizeof( struct StackNode ));
+   puts( "1) Push" );
+   puts( "2) Pop" );
+   puts( "3) to end program" );
+}
 
-     if( newPtr != NULL ) {
-        newPtr->dato = value;
-        newPtr->nextPtr = *topPtr;
+StackNode* CreaNodo_SL( int dato ) {
+
+   StackNode* newPtr = ( StackNode* )malloc( sizeof( StackNode ));
+   newPtr->dato = dato;
+   newPtr->next = NULL;
+
+   return newPtr;
+}
+
+void StackPush( StackNode** topPtr, int dato ) {
+
+    StackNode* newPtr;
+
+    if( *topPtr == NULL ) {
+        *topPtr = CreaNodo_SL( dato );
+    }
+    else {
+        newPtr = CreaNodo_SL( dato );
+        newPtr->next = *topPtr;
         *topPtr = newPtr;
-     }
-     else {
-        printf( "Non c'e' piu' spazio\n" );
-     }
+    }
 }
 
-int StackPop( struct StackNode** topPtr ) {
+void StackPop( StackNode** topPtr ) {
 
+    StackNode* tempPtr;
 
-      struct StackNode* tempPtr;
-      int popValue;
-
-      tempPtr = *topPtr;
-      popValue = ( *topPtr )->dato;
-      *topPtr = ( *topPtr )->nextPtr;
-      free( tempPtr );
-      return popValue;
-
+    tempPtr = *topPtr;
+    *topPtr = ( *topPtr )->next;
+    free( tempPtr );
 }
 
-void printfStack( struct StackNode* topPtr ) {
+void StampaStack( StackNode* topPtr ) {
 
      if( topPtr == NULL )
-         printf( "Lo stack e' vuoto. \n" );
+         puts( "Lo stack e' vuoto. " );
      else {
          printf( "\n\n STACK : \n\n" );
 
          while( topPtr != NULL ) {
             printf( "  ----->  %d", topPtr->dato );
-            topPtr = topPtr->nextPtr;
+            topPtr = topPtr->next;
          }
      }
-     printf("\n");
+     puts( "" );
 }
