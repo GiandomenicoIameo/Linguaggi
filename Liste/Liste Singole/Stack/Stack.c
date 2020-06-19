@@ -8,7 +8,7 @@ struct StackNode{
 
 typedef struct StackNode StackNode;
 
-StackNode* CreaNodo_SL( int value );
+StackNode* CreaNodoStack( int value );
 void StackPush( StackNode** topPtr, int value );
 void StackPop( StackNode** topPtr );
 void StampaStack( StackNode* topPtr );
@@ -60,7 +60,7 @@ void instructions( void ) {
    puts( "3) to end program" );
 }
 
-StackNode* CreaNodo_SL( int dato ) {
+StackNode* CreaNodoStack( int dato ) {
 
    StackNode* newPtr = ( StackNode* )malloc( sizeof( StackNode ));
    newPtr->dato = dato;
@@ -71,13 +71,12 @@ StackNode* CreaNodo_SL( int dato ) {
 
 void StackPush( StackNode** topPtr, int dato ) {
 
-    StackNode* newPtr;
+    StackNode* newPtr = CreaNodoStack( dato );
 
     if( *topPtr == NULL ) {
-        *topPtr = CreaNodo_SL( dato );
+        *topPtr = newPtr;
     }
     else {
-        newPtr = CreaNodo_SL( dato );
         newPtr->next = *topPtr;
         *topPtr = newPtr;
     }
