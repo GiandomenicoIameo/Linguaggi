@@ -152,13 +152,13 @@ int ConfrontaStringa( char** array, char* string ) {
 void* AttraversaCoda_SL( Coda_SL* topPtr ) {
 
      int sizeArray = 0;
-     void* arrayStringhe;
+     void* array;
 
      while( topPtr != NULL ) {
        sizeArray = sizeArray + 1;
        topPtr = topPtr->next;
      }
 
-    arrayStringhe = calloc( sizeArray, sizeof( void* ));
-    return arrayStringhe;
+    array = calloc( sizeArray, sizeof( void* ));
+    return array;
 }
