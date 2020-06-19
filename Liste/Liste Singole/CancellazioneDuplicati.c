@@ -139,8 +139,8 @@ int ConfrontaStringa( char** array, char* string ) {
 
     int value, indice;
 
-    value = strcmp( array[ 0 ], string );
     indice = 0;
+    value = strcmp( array[ indice ], string );
 
     while( value ) {
       value = strcmp( array[ indice ], string );
