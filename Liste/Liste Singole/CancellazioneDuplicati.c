@@ -50,12 +50,12 @@ int main( void ) {
   return 0;
 }
 
-Coda_SL* CreaNodo_SL( char* nomeCitta, int size ) {
+Coda_SL* CreaNodo_SL( char* username, int size ) {
 
    Coda_SL* nodoCoda = ( Coda_SL* )malloc( sizeof( Coda_SL ));
 
    nodoCoda->username = ( char* )calloc( size, sizeof( char ));
-   strcpy( nodoCoda->username, nomeCitta );
+   strcpy( nodoCoda->username, username );
 
    nodoCoda->next = NULL;
    return nodoCoda;
