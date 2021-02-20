@@ -2,7 +2,7 @@
 
 void stringReverse( const char* array );
 
-int main( void ){
+int main( void ) {
     
     char array[] = "Hello";
     
@@ -16,7 +16,7 @@ void stringReverse( const char* array ){
     
      if( *array == '\0' )
          return; // il controllo ritorna al chiamante
-     else{
+     else {
          stringReverse( array + 1 );
          putchar( *array );
      }
