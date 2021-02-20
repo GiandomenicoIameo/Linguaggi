@@ -1,27 +1,26 @@
 #include <stdio.h>
 
-int sum( int n );
+int sommaRicorsiva( int n );
 
 int main( void ){
     
-    int value;
-    int result;
+    int val;
+    int res;
     
     puts( "Inserisci numero da calcolare" );
-    scanf( "%d", &value );
+    scanf( "%d", &val );
     
-    result = sum( value );
-    printf( "%d\n", result );
+    res = sommaRicorsiva( val );
+    printf( "%d\n", res );
     
     return 0;
 }
 
-int sum( int n ){
+int sommaRicorsiva( int n ){
     
-    if( n == 0 ) { 
-        return 0;
-    }        
-    return n + sum( n - 1 );
+    if( n == 0 ) 
+        return n;        
+    return n + sommaRicorsiva( n - 1 );
 }
 
 
