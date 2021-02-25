@@ -50,7 +50,7 @@ struct elem* convertFromIntToList( struct elem* top, int intero ) {
   struct elem* nodo;
 
   do {
-	    resto = intero % 10;
+      resto = intero % 10;
       nodo = creaNodo( resto );
 
       if( nodo == NULL ) gestioneErrore();
