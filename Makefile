@@ -11,4 +11,4 @@ funzioni.o: funzioni.c funzioni.h
 	$(CC) $(CFLAGS) -c funzioni.c
 
 clean:
-	rm *.o
+	rm *.o program
