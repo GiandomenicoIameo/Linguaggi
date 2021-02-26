@@ -4,8 +4,8 @@
 #include <stdio.h>
 
 char isvowel( char c );
-unsigned int countdigit( char* str );
-unsigned int countcharacter( char* str );
-unsigned int countspace( char* str );
+unsigned int countdigit( const char* str );
+unsigned int countcharacter( const char* str );
+unsigned int countspace( const char* str );
 
 #endif
