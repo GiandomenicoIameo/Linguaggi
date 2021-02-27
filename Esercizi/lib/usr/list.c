@@ -2,16 +2,16 @@
 #include <stdlib.h>
 #include "../include/list.h"
 
-struct Node* createList( void ) {
+struct elem* createList( void ) {
   return NULL;
 }
 
-struct Node* createNode( int data ) {
+struct elem* createNode( int data ) {
 
-  struct Node* node;
+  struct elem* node;
 
-  node = ( struct Node* )malloc( sizeof( struct Node ) );
-  if( node == NULL ) return NULL;
+  node = ( struct elem* )malloc( sizeof( struct elem ) );
+  if( node == NULL ) return node;
 
   node->data = data;
   node->next = NULL;
@@ -19,9 +19,7 @@ struct Node* createNode( int data ) {
   return node;
 }
 
-struct Node* push( struct Node* top, int data ) {
-
-  struct Node* node = createNode( data );
+struct elem* push( struct elem* top, struct* elem node ) {
 
   if( top == NULL )
       top = node;
@@ -32,18 +30,15 @@ struct Node* push( struct Node* top, int data ) {
   return top;
 }
 
-struct Node* enqueue( struct Node* top, int data ) {
+struct elem* enqueue( struct elem* top, struct elem* node ) {
 
-  struct Node* node = createNode( data );
-  struct Node* temp;
+  struct elem* res;
 
-  if( top == NULL ) return node;
-
-  temp = top;
-  while( temp->next != NULL ) {
-    temp = temp->next;
+  if( top == NULL )
+      res = node;
+  else {
+      top->next = enqueue( top->next, node );
+      res = top;
   }
-  temp->next = node;
-
-  return top;
+  return res;
 }
