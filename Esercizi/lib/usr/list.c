@@ -8,7 +8,7 @@ struct elem* createList( void ) {
 
 struct elem* createNode( int data ) {
 
-  struct elem* node;
+  struct elem *node;
 
   node = ( struct elem* )malloc( sizeof( struct elem ) );
   if( node == NULL ) return node;
@@ -19,7 +19,7 @@ struct elem* createNode( int data ) {
   return node;
 }
 
-struct elem* push( struct elem* top, struct* elem node ) {
+struct elem* push( struct elem *top, struct elem *node ) {
 
   if( top == NULL )
       top = node;
@@ -30,9 +30,9 @@ struct elem* push( struct elem* top, struct* elem node ) {
   return top;
 }
 
-struct elem* enqueue( struct elem* top, struct elem* node ) {
+struct elem* enqueue( struct elem *top, struct elem *node ) {
 
-  struct elem* res;
+  struct elem *res;
 
   if( top == NULL )
       res = node;
