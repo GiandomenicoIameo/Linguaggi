@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "../include/List.h"
+#include "../include/list.h"
 
 struct Node* createList( void ) {
   return NULL;
