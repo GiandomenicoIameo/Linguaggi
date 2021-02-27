@@ -1,5 +1,5 @@
-#ifndef CHARACTERS
-#define CHARACTERS
+#ifndef _CHARACTERS_H
+#define _CHARACTERS_H
 
 #include <stdio.h>
 
