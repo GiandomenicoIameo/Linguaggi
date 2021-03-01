@@ -12,11 +12,14 @@ Descrivere e definire chiaramente le strutture dati ed i prototipi delle funzion
 Utilizzare un approccio top-down per la scrittura del main.
 
 Esempio:
+
 input.txt
+
 2
 -8
 5
 -5
+
 L→ -8 → -5 → 2 → 5
 
 [ Esercizio 2 ] :
