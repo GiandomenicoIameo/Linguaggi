@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-int prime( int n );
+int isAtomic( int n );
 
 int main( void ) {
 
@@ -11,7 +11,7 @@ int main( void ) {
       scanf( "%d", &n );
   } while( n < 0 );
 
-  res = prime( n );
+  res = isAtomic( n );
 
   if( res )
     puts( "Il numero e' primo" );
@@ -21,7 +21,7 @@ int main( void ) {
   return 0;
 }
 
-int prime( int n ) {
+int isAtomic( int n ) {
 
   // La funzione verifica se n è un numero primo oppure il contrario.
   // Complessità algoritmo O( n/6 ).
