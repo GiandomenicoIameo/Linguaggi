@@ -23,8 +23,10 @@ int main( void ) {
 
 int isAtomic( int n ) {
 
-  // La funzione verifica se n è un numero primo oppure il contrario.
-  // Complessità algoritmo O( n/6 ).
+  // La funzione verifica se n è un numero primo
+  // appartenente all'insieme dei numeri naturali oppure no.
+  // Complessità algoritmo in termini di tempo : O( n/6 ).
+  // Complessità algoritmo in termini di spazio : Θ( 1 ).
 
   if( n == 2 ) {
       return 1;
