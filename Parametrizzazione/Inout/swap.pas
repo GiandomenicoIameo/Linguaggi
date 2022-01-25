@@ -1,4 +1,4 @@
-program swap;
+program swap; (* Passaggio di parametri : in out per riferimento *)
   var a, b : integer;
   procedure swap( var a, b : integer );
     var tmp : integer;
