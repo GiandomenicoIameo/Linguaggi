@@ -7,7 +7,7 @@ Calcolo combinatorio
 ----------
 
 Il predicato **binomial/2** consente di ricercare il numero dei sottoinsiemi di una certa cardinalità. In
-particolare, il suddetto predicato è anche bidirezionale. Vediamo alcuni esempi :
+particolare, come accade spesso nel linguaggio Prolog, esso è anche bidirezionale. Vediamo alcuni esempi :
 
 ```
 ?- binomial( [ a,b,c ], X ).
@@ -22,7 +22,7 @@ X = [c] ;
 false. 
 ```
 In questo caso, il predicato ha ricercato lungo l'albero di derivazione ogni sottoinsieme di [ a,b,c ] di cardinalità 1,2,3. Tuttavia, è possibile 
-imporre al programma di ricercare sottoinsiemi solo di cardinalità 2 :
+imporre al programma di ricercare solo sottoinsiemi di cardinalità 2 :
 
 ```
 ?- binomial( [ a,b,c ], [ X,Y ] ).
@@ -34,7 +34,7 @@ X = b,
 Y = c ;
 false.
 ```
-Inoltre, come dicevamo prima, il predicato è bidirezionale quindi risulterà possibile ricercare gli insiemi tali che un certo insieme [ a,b ] sia sottoinsieme degli insiemi di partenza :
+Ritornando al concetto di bidirezionalità, il predicato può essere usato per ricercare gli insiemi tali che un certo insieme [ a,b ] sia sottoinsieme di tali insiemi :
 
 ```
 ?- binomial( X, [ a,b ] ).
