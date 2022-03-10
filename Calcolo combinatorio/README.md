@@ -31,7 +31,7 @@ X = b,
 Y = c ;
 false.
 ```
-Ritornando al concetto di bidirezionalità, il predicato può essere usato per ricercare tutti i soprainsiemi di un certo certo insieme :
+Ritornando al concetto di bidirezionalità, il predicato può essere usato per ricercare tutti i soprainsiemi di un certo insieme :
 
 ```
 ?- binomial( X, [ a,b ] ).
