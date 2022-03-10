@@ -3,7 +3,7 @@ Calcolo combinatorio
 ----------
 
 
-***Predicato binomial / 2*** :
+**binomial/2**:
 ----------
 
 Il predicato **binomial / 2** consente di ricercare il numero dei sottoinsiemi di una certa cardinalità. In
