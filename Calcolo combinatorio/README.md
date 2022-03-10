@@ -29,7 +29,8 @@ binomial/2 :
 Il predicato binomial/2 consente di ricercare il numero dei sottoinsiemi di una certa cardinalità. In
 particolare, il suddetto predicato è bidirezionale. Vediamo alcuni esempi :
 
-```?- binomial( [ a,b,c ], X ).
+```
+?- binomial( [ a,b,c ], X ).
 X = [] ;
 X = [a] ;
 X = [a, b] ;
