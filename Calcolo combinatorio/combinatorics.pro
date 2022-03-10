@@ -8,7 +8,7 @@ queue( X, [ X|List ], List ).
 queue( X, [ _|List ], Queue ) :- queue( X, List, Queue ).           
                                                                     
 permutation( _, [] ).
-permutation( List, [ X|Rest ] ) :- cancella( X, List, Comb ),       
+permutation( List, [ X|Rest ] ) :- delete( X, List, Comb ),       
 permutation( Comb, Rest ).                                          
                                                                     
 combination( _, [] ).
