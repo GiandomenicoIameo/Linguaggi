@@ -14,7 +14,6 @@ E' possibile scaricare e installare **SWI-Prolog** direttamente dal sito ufficia
 **Linux**:
 
 Aggiungi il ppa **ppa:swi-prolog/stable** alle sorgenti software del tuo sistema :
-Apri il terminale e digita:
 
  ```$ sudo add-apt-repository ppa:swi-prolog/stable ```
 
