@@ -53,7 +53,7 @@ X = b,
 Y = c ;
 false.
 ```
-Inoltre, come dicevamo prima, il predicato è bidirezionale quindi risulterà possibile possibile ricercare gli insiemi tali che un certo insieme [ a,b ] sia sottoinsieme degli insiemi di partenza :
+Inoltre, come dicevamo prima, il predicato è bidirezionale quindi risulterà possibile ricercare gli insiemi tali che un certo insieme [ a,b ] sia sottoinsieme degli insiemi di partenza :
 
 ```
 ?- binomial( X, [ a,b ] ).
