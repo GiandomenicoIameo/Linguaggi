@@ -1,6 +1,6 @@
 Prolog
 ===================
-
+----------
 
 
 Installazione e configurazione :
