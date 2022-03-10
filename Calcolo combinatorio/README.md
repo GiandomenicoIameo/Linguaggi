@@ -6,7 +6,7 @@ Calcolo combinatorio
 **binomial/2**:
 ----------
 
-Il predicato **binomial/2** consente di ricercare il numero dei sottoinsiemi di una certa cardinalità. In
+Il predicato ```binomial/2``` consente di ricercare il numero dei sottoinsiemi di una certa cardinalità. In
 particolare, come accade spesso nel linguaggio Prolog, esso è anche bidirezionale. Vediamo alcuni esempi :
 
 ```
@@ -21,7 +21,7 @@ X = [b, c] ;
 X = [c] ;
 false. 
 ```
-In questo caso, il predicato ha ricercato lungo l'albero di derivazione ogni sottoinsieme di [ a,b,c ] di cardinalità 1,2,3. Tuttavia, è possibile 
+In questo caso, il predicato ha ricercato lungo l'albero di derivazione ogni sottoinsieme di ```[ a,b,c ]``` di cardinalità 1,2,3. Tuttavia, è possibile 
 imporre al programma di ricercare solo sottoinsiemi di cardinalità 2 :
 
 ```
@@ -47,7 +47,7 @@ X = [a, _3194, _3200, _3206, b|_3214] ;
 In questo caso, sono stati ricercati tutti i soprainsiemi dell'insieme 
 ```[a, b]``` e cioè tutti gli insieme ```X``` tali che,```X``` contiene ```[a, b]``` come parte. Ovviamente i risultati non avranno fine.
 
-**N.B.** Il predicato binomial/2 suppone per ipotesi che l'insieme ricevuto in input sia effettivamente un insieme. Tuttavia, se il predicato riceverà in input una ennupla ordinata in cui compaiono elementi ripetuti, i risultati che produrrà potrebbero essere non quelli desiderati : verranno generati insiemi con elementi ripetuti. Per ovviare a ciò, è possibile utilizzare il predicato ```generate_binomial/2``` :
+**N.B.** Il predicato ```binomial/2``` suppone per ipotesi che l'insieme ricevuto in input sia effettivamente un insieme. Tuttavia, se il predicato riceverà in input una ennupla ordinata in cui compaiono elementi ripetuti, i risultati che produrrà potrebbero essere non quelli desiderati : verranno generati insiemi con elementi ripetuti. Per ovviare a ciò, è possibile utilizzare il predicato ```generate_binomial/2``` :
 
 ```
 ?- generate_binomial( [ a,b,c,a,c ], X ).
