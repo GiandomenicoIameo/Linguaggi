@@ -8,7 +8,7 @@ Installazione e configurazione :
 
 **Windows** **e** **Mac**:
 
-E' possibile scaricare e installare **SWI-Prolog** direttamente dal sito ufficiale <link>,
+E' possibile scaricare e installare **SWI-Prolog** direttamente dal sito ufficiale **[ download ]( https://www.swi-prolog.org/download/stable )**,
 è sufficiente seguire la procedura di installazione.
 
 **Linux**:
