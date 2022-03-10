@@ -16,15 +16,15 @@ E' possibile scaricare e installare **SWI-Prolog** direttamente dal sito ufficia
 Aggiungi il ppa **ppa:swi-prolog/stable** alle sorgenti software del tuo sistema :
 Apri il terminale e digita:
 
- **```$ sudo add-apt-repository ppa:swi-prolog/stable ```**
+ ```$ sudo add-apt-repository ppa:swi-prolog/stable ```
 
 Successivamente, aggiorna le informazioni sul pacchetto:
 
-**```$ sudo apt-get update```**
+```$ sudo apt-get update```
 
 Ora installa SWI-Prolog tramite il gestore pacchetti principale:
 
-**```$ sudo apt-get install swi-prolog```**
+```$ sudo apt-get install swi-prolog```
 
 **binomial/2** :
 ----------
