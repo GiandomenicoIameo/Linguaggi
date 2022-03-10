@@ -28,7 +28,7 @@ Ora installa SWI-Prolog tramite il gestore pacchetti principale:
 ***binomial / 2*** :
 ----------
 
-Il predicato **binomial/2** consente di ricercare il numero dei sottoinsiemi di una certa cardinalità. In
+Il predicato **binomial / 2** consente di ricercare il numero dei sottoinsiemi di una certa cardinalità. In
 particolare, il suddetto predicato è anche bidirezionale. Vediamo alcuni esempi :
 
 ```
