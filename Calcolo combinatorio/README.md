@@ -24,7 +24,7 @@ Successivamente, aggiorna le informazioni sul pacchetto:
 
 Ora installa SWI-Prolog tramite il gestore pacchetti principale:
 
-```$ sudo apt-get install swi-prolog```
+```$ sudo apt install swi-prolog```
 
 **binomial/2** :
 ----------
