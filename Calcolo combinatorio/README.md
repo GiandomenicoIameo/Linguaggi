@@ -19,7 +19,7 @@ X = [b, c] ;
 X = [c] ;
 false. 
 ```
-In questo caso, il predicato ha ricercato lungo l'albero di derivazione ogni sottoinsieme di ```[a, b, c]``` di cardinalità 1,2,3. Come è possibile notare, il numero dei sottoinsiemi generati è uguale al numero di sottoinsiemi dell’insieme delle parti di ```[a, b, c]```. Tuttavia, è possibile imporre al programma di ricercare solo sottoinsiemi di cardinalità **2** :
+In questo caso, il predicato ha ricercato lungo l'albero di derivazione ogni sottoinsieme di ```[a, b, c]``` di cardinalità 1,2,3. Come è possibile notare, il numero dei sottoinsiemi generati è uguale al numero di sottoinsiemi dell’insieme delle parti di ```[a, b, c]```. Tuttavia, è possibile imporre al programma di ricercare solo sottoinsiemi di cardinalità 2 :
 
 ```
 ?- binomial( [ a,b,c ], [ X,Y ] ).
