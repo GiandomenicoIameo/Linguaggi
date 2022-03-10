@@ -46,5 +46,20 @@ X = [a, _3194, _3200, _3206, b|_3214] ;
 ```
 In questo caso, sono stati ricercati tutti i soprainsiemi dell'insieme [ a,b ] e cioè tutti gli insieme X tali che, X contiene [ a,b ] come parte. Ovviamente i risultati non avranno fine.
 
-**N.B.** Il predicato binomial/2 suppone per ipotesi che l'insieme ricevuto in input sia effettivamente un insieme. Tuttavia, se il predicato riceverà in input una ennupla ordinata in cui compaiono elementi ripetuti, i risultati che produrrà potrebbero essere non quelli desiderati : verranno generati insiemi con elementi ripetuti. Per ovviare a ciò, è possibile utilizzare il predicato **generate_binomial/2**. Il predicato considererà l'insieme [ a,a,b ] prefettamente equivalente all'insieme [ a,b ].
+**N.B.** Il predicato binomial/2 suppone per ipotesi che l'insieme ricevuto in input sia effettivamente un insieme. Tuttavia, se il predicato riceverà in input una ennupla ordinata in cui compaiono elementi ripetuti, i risultati che produrrà potrebbero essere non quelli desiderati : verranno generati insiemi con elementi ripetuti. Per ovviare a ciò, è possibile utilizzare il predicato **generate_binomial/2** :
+
+```
+?- generate_binomial( [ a,b,c,a,c ], X ).
+X = [] ;
+X = [a] ;
+X = [a, b] ;
+X = [a, b, c] ;
+X = [a, c] ;
+X = [b] ;
+X = [b, c] ;
+X = [c] ;
+false.
+```
+
+Il predicato considererà l'insieme [ a,b,c,a,c ] prefettamente equivalente all'insieme [ a,b,c ].
 
