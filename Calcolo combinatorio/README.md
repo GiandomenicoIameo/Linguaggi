@@ -23,47 +23,24 @@ Linux:
        Apri il terminale e digita:
        ```$ sudo apt-get install swi-prolog```
 
-
-Il file contiene alcune delle piu' importanti funzioni riguardo
-alle **liste semplicemente concatenate**. Ogni funzione dichiarata e'
-stata studiata nel minimo dettaglio per garantire, a chi le utilizza,
-prestazioni efficienti in relazione al **tempo** e allo **spazio** utilizzato.
-
+binomial/2 :
 ----------
 
-Il file header ( stdlist.h ) introduce le **strutture dati dinamiche** che
-possono crescere e ridursi al momento dell'esecuzione.
+Il predicato binomial/2 consente di ricercare il numero dei sottoinsiemi di una certa cardinalità. In
+particolare, il suddetto predicato è bidirezionale. Vediamo alcuni esempi :
 
-- Le **liste collegate** sono collezioni di dati "allineati in una riga".
-  In una lista collegata le inserzioni e le cancellazioni vengono fatte
-  ovunque.
-
-- Lo **stack** e' un tipo di lista collegata molto importante nei sistemi
-  operativi e compilatori. Le inserzioni e cancellazioni vengono fatte
- _solo a un estremo_, ovvero la sua **cima**.
-
-- Le **code** rappresentano le linee di attesa; le inserzioni vengono fatte
-  _solo alla fine_ ( indicata con **tail** ) di una coda e le rimozioni
-  vengono fatte _solo all'inizio_ ( indicato con **head** ) di una coda.
-
-Ricordate che una _struttura autoreferenziale_ contiene un membro puntatore
-che punta a una struttura dello stesso tipo. Le definizioni sono le seguenti :
-
-```
-// Struttura del nodo
-struct elem {
-    int data;
-    struct elem *next;
-};
-
-// Struttura della coda
-struct equeue {
-    struct elem *top;
-    struct elem *end;
-};
+```?- binomial( [ a,b,c ], X ).
+X = [] ;
+X = [a] ;
+X = [a, b] ;
+X = [a, b, c] ;
+X = [a, c] ;
+X = [b] ;
+X = [b, c] ;
+X = [c] ;
+false. 
 ```
 
-Lo stile di scrittura del codice, come potete notare, rispecchia lo 
-stile adottato in **GNOME**. Sebbene lo stile sia una questione di gusti, in 
-**GNOME** preferiscono uno stile che promuova coerenza, leggibilità e 
-manutenibilità. 
+
+
+
