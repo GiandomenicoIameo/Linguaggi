@@ -7,14 +7,22 @@ Installazione e configurazione :
 ----------
 
 Windows e Mac :
+E' possibile scaricare e installare SWI-Prolog direttamente dal sito ufficiale <link>,
+è sufficiente seguire la procedura di installazione.
 
-Ogni programma scritto nel linguaggio C contiene tipicamente
-riferimenti a funzioni definite altrove, come le librerie standard
-o nelle librerie private. Un esempio e' stdlist.c.
+Linux:
 
-Insieme alla libreria vengono inoltre forniti gli **header
-file**, file di testo che permettono al programmatore di utilizzare
-lo specifico insieme di funzioni della libreria a esse associate.
+ 1. Aggiungi il ppa ppa:swi-prolog/stable alle sorgenti software del tuo sistema :
+       Apri il terminale e digita:
+       ```$ sudo add-apt-repository ppa:swi-prolog/stable ```
+
+       Successivamente, aggiorna le informazioni sul pacchetto:
+       ```$ sudo apt-get update```
+
+       Ora installa SWI-Prolog tramite il gestore pacchetti principale:
+       Apri il terminale e digita:
+       ```$ sudo apt-get install swi-prolog```
+
 
 Il file contiene alcune delle piu' importanti funzioni riguardo
 alle **liste semplicemente concatenate**. Ogni funzione dichiarata e'
