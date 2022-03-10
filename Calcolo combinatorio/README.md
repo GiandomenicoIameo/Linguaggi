@@ -21,7 +21,7 @@ false.
 ```
 In questo caso, il predicato ha ricercato lungo l'albero di derivazione ogni sottoinsieme di ```[a, b, c]``` di cardinalità 1,2 e 3. Come è possibile notare, il numero dei sottoinsiemi generati è uguale al numero di sottoinsiemi dell’insieme delle parti di ```[a, b, c]```. Tuttavia, è possibile imporre al programma di ricercare solo sottoinsiemi di cardinalità 2 :
 
-```
+```prolog
 ?- binomial( [ a,b,c ], [ X,Y ] ).
 X = a,
 Y = b ;
@@ -33,7 +33,7 @@ false.
 ```
 Ritornando al concetto di bidirezionalità, il predicato può essere usato per ricercare tutti i soprainsiemi di un certo insieme :
 
-```
+```prolog
 ?- binomial( X, [ a,b ] ).
 X = [a, b|_3196] ;
 X = [a, _3194, b|_3202] ;
@@ -47,7 +47,7 @@ In questo caso, sono stati ricercati tutti i soprainsiemi dell'insieme
 ----------
 **N.B.** Il predicato ```binomial/2``` suppone per ipotesi che l'insieme ricevuto come argomento sia effettivamente un insieme. Tuttavia, se il predicato riceverà in input una ennupla ordinata in cui compaiono elementi ripetuti, i risultati che produrrà potrebbero essere non quelli desiderati : verranno generati insiemi con elementi ripetuti. Per ovviare a ciò, è possibile utilizzare il predicato ```generate_binomial/2``` :
 
-```
+```prolog
 ?- generate_binomial( [ a,b,c,a,c ], X ).
 X = [] ;
 X = [a] ;
