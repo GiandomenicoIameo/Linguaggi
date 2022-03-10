@@ -6,7 +6,7 @@ Calcolo combinatorio
 ```binomial/2```:
 ----------
 
-Il predicato ```binomial/2``` consente di ricercare il numero dei sottoinsiemi di una certa cardinalità. In
+Il predicato ```binomial/2``` consente di ricercare il numero dei sottoinsiemi, di un particolare insieme, aventi una certa cardinalità. In
 particolare, come accade spesso nel linguaggio Prolog, esso è anche bidirezionale. Vediamo alcuni esempi :
 
 ```
