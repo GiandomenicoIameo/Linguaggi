@@ -7,8 +7,8 @@ int main( void ) {
   int n, res;
 
   do {
-      printf( "Inserisci un numero : " );
-      scanf( "%d", &n );
+          printf( "Inserisci un numero : " );
+          scanf( "%d", &n );
   } while( n < 0 );
 
   res = isAtomic( n );
