@@ -13,11 +13,11 @@ int main( void ) {
 
   res = isAtomic( n );
 
-  if( res )
-    puts( "Il numero e' primo" );
-  else
-    puts( "Il numero non e' primo" );
-
+  if( res ) {
+          puts( "Il numero e' primo" );
+  } else {
+          puts( "Il numero non e' primo" );
+  }
   return 0;
 }
 
@@ -29,23 +29,24 @@ int isAtomic( int n ) {
   // Complessità algoritmo in termini di spazio : Θ( 1 ).
 
   if( n == 2 ) {
-      return 1;
+          return 1;
   }
-  else if( n % 2 == 0 ) {
-      return 0;
+  if( n % 2 == 0 ) {
+          return 0;
   }
   if( n == 1 ) {
-      return 0;
+          return 0;
   }
+
   int rest;
   int div = 3;
 
   while( div <= n / 3 ) {
       rest = n % div;
+
       if( !rest ) {
-          return 0;
-      }
-      div = div + 2;
+              return 0;
+      } div = div + 2;
   }
   return 1;
 }
