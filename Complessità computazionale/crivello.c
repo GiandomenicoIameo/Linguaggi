@@ -4,16 +4,13 @@ int isAtomic( int n );
 
 int main( void ) {
 
-  int n, res;
-
+  int n;
   do {
           printf( "Inserisci un numero : " );
           scanf( "%d", &n );
   } while( n < 0 );
 
-  res = isAtomic( n );
-
-  if( res ) {
+  if( isAtomic( n ) ) {
           puts( "Il numero e' primo" );
   } else {
           puts( "Il numero non e' primo" );
