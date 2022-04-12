@@ -1,39 +1,49 @@
 #include <stdio.h>
 #include <math.h>
+#include <stdbool.h>
 
-int atomics( int n );
-int primes( int n );
+bool primes( int n );
+bool atomics( int n );
+
+bool positive( int n );
+void choice_number( int *pointer );
 
 int main( void ) {
 
   int n;
-  do {
-          printf( "Inserisci un numero : " );
-          scanf( "%d", &n );
-  } while( n < 0 );
+  choice_number( &n );
 
   if( atomics( n ) ) {
           puts( "Il numero e' primo" );
   } else {
           puts( "Il numero non e' primo" );
   }
+
   return 0;
 }
 
-int atomics( int n ) {
+bool positive( int n ) {
 
-  if( n == 2 ) {
-          return 1;
-  } else if( n % 2 == 0 ) {
-          return 0;
-  } else if( n == 1 ) {
-                  return 0;
-  } else {
-          return primes( n );
+  if( n < 0 ) {
+          return false;
+  } return true;
+}
+
+void choice_number( int *pointer ) {
+
+  printf( "Inserisci un numero : " );
+  scanf( "%d", pointer );
+
+  switch( positive( *pointer ) ) {
+  case true:
+        break;
+  case false:
+        choice_number( pointer );
+        break;
   }
 }
 
-int primes( int n ) {
+bool primes( int n ) {
 
   int rest, div;
   double square;
@@ -51,8 +61,22 @@ int primes( int n ) {
       rest = n % div;
 
       if( !rest ) {
-              return 0;
+              return false;
       } div = div + 2;
   }
-  return 1;
+  return true;
+}
+
+bool atomics( int n ) {
+
+  if( n == 2 ) {
+          return true;
+  } else if( n % 2 == 0 ) {
+          return false;
+  } else if( n == 1 ) {
+          return false;
+  } else {
+          return primes( n );
+  }
+
 }
