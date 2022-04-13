@@ -23,9 +23,9 @@ int main( void ) {
 
 bool positive( int n ) {
 
-     if( n < 0 )
-             return false;
-     return true;
+    if( n < 0 )
+            return false;
+    return true;
 }
 
 void choice_number( int *pointer ) {
