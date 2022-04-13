@@ -13,10 +13,11 @@ int main( void ) {
     int n;
     choice_number( &n );
 
-    if( atomics( n ) )
+    if( atomics( n ) ) {
             puts( "Il numero e' primo" );
-    else
+    } else {
             puts( "Il numero non e' primo" );
+    }
 
     return 0;
 }
