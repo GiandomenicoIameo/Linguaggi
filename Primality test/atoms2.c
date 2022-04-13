@@ -23,9 +23,9 @@ int main( void ) {
 
 bool positive( int n ) {
 
-    if( n < 0 )
+    if( n < 0 ) {
             return false;
-    return true;
+    } return true;
 }
 
 void choice_number( int *pointer ) {
@@ -59,9 +59,9 @@ bool primes( int n ) {
     while( div <= square ) {
             rest = n % div;
 
-            if( !rest )
+            if( !rest ) {
                     return false;
-
+            }
             div = div + 2;
      }
      return true;
@@ -69,15 +69,13 @@ bool primes( int n ) {
 
 bool atomics( int n ) {
 
-    if( n == 2 )
+    if( n == 2 ) {
             return true;
-    
-    else if( n % 2 == 0 )
+    } else if( n % 2 == 0 ) {
             return false;
-    
-    else if( n == 1 )
+    } else if( n == 1 ) {
             return false;
-    
-    else
+    } else {
             return primes( n );
+    }
 }
