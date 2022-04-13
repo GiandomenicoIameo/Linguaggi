@@ -50,8 +50,8 @@ bool primes( int n ) {
   // La funzione verifica se n è un numero primo
   // appartenente all'insieme dei numeri naturali.
   //
-  // La complessità dell'algoritmo in termini di tempo : O( 1/2 * sqrt( n ) ).
-  // La complessità dell'algoritmo in termini di spazio : Θ( 1 ).
+  // La complessità dell'algoritmo in termini di tempo e' : O( 1/2 * sqrt( n ) ).
+  // La complessità dell'algoritmo in termini di spazio e' : Θ( 1 ).
 
   div = 3;
   square = sqrt( n );

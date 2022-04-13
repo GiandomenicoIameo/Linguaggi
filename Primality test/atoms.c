@@ -23,8 +23,8 @@ int atomics( int n ) {
   // La funzione verifica se n è un numero primo
   // appartenente all'insieme dei numeri naturali.
   //
-  // La complessità dell'algoritmo in termini di tempo : O( n/6 ).
-  // La complessità dell'algoritmo in termini di spazio : Θ( 1 ).
+  // La complessità dell'algoritmo in termini di tempo e' : O( n/6 ).
+  // La complessità dell'algoritmo in termini di spazio e' : Θ( 1 ).
 
    if( n == 2 )
            return 1;
