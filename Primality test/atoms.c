@@ -1,82 +1,50 @@
 #include <stdio.h>
-#include <math.h>
-#include <stdbool.h>
 
-bool primes( int n );
-bool atomics( int n );
-
-bool positive( int n );
-void choice_number( int *pointer );
+int atomics( int n );
 
 int main( void ) {
 
-  int n;
-  choice_number( &n );
+   int n;
+   do {
+           printf( "Inserisci un numero : " );
+           scanf( "%d", &n );
+   } while( n < 0 );
 
-  if( atomics( n ) ) {
-          puts( "Il numero e' primo" );
-  } else {
-          puts( "Il numero non e' primo" );
-  }
+   if( atomics( n ) )
+           puts( "Il numero e' primo" );
+   else
+           puts( "Il numero non e' primo" );
 
-  return 0;
+   return 0;
 }
 
-bool positive( int n ) {
-
-  if( n < 0 ) {
-          return false;
-  } return true;
-}
-
-void choice_number( int *pointer ) {
-
-  printf( "Inserisci un numero : " );
-  scanf( "%d", pointer );
-
-  switch( positive( *pointer ) ) {
-  case true:
-        break;
-  case false:
-        choice_number( pointer );
-        break;
-  }
-}
-
-bool primes( int n ) {
-
-  int rest, div;
-  double square;
+int atomics( int n ) {
 
   // La funzione verifica se n è un numero primo
   // appartenente all'insieme dei numeri naturali.
   //
-  // La complessità dell'algoritmo in termini di tempo : O( 1/2 * sqrt( n ) ).
+  // La complessità dell'algoritmo in termini di tempo : O( n/6 ).
   // La complessità dell'algoritmo in termini di spazio : Θ( 1 ).
 
-  div = 3;
-  square = sqrt( n );
+   if( n == 2 )
+           return 1;
 
-  while( div <= square ) {
-      rest = n % div;
+   if( n % 2 == 0 )
+           return 0;
 
-      if( !rest ) {
-              return false;
-      } div = div + 2;
-  }
-  return true;
-}
+   if( n == 1 )
+           return 0;
 
-bool atomics( int n ) {
+   int rest;
+   int div = 3;
 
-  if( n == 2 ) {
-          return true;
-  } else if( n % 2 == 0 ) {
-          return false;
-  } else if( n == 1 ) {
-          return false;
-  } else {
-          return primes( n );
-  }
+   while( div <= n / 3 ) {
+       rest = n % div;
 
+       if( !rest )
+               return 0;
+
+       div = div + 2;
+   }
+   return 1;
 }
