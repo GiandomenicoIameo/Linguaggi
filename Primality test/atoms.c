@@ -20,7 +20,7 @@ int main( void ) {
     return 0;
 }
 
-int atomics( int n ) {
+bool atomics( int n ) {
 
     // La funzione verifica se n è un numero primo
     // appartenente all'insieme dei numeri naturali.
@@ -29,13 +29,13 @@ int atomics( int n ) {
     // La complessità dell'algoritmo in termini di spazio e' : Θ( 1 ).
 
     if( n == 2 ) {
-            return 1;
+            return true;
     }
     if( n % 2 == 0 ) {
-            return 0;
+            return false;
     }
     if( n == 1 ) {
-            return 0;
+            return false;
     }
 
     int rest;
@@ -45,9 +45,9 @@ int atomics( int n ) {
             rest = n % div;
 
             if( !rest ) {
-                    return 0;
+                    return false;
             }
             div = div + 2;
     }
-    return 1;
+    return true;
 }
