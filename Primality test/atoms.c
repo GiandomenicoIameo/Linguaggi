@@ -2,6 +2,7 @@
 #include <stdbool.h>
 
 bool atomics( int n );
+bool primes( int n );
 
 int main( void ) {
 
@@ -20,7 +21,7 @@ int main( void ) {
     return 0;
 }
 
-bool atomics( int n ) {
+bool primes( int n ) {
 
     // La funzione verifica se n è un numero primo
     // appartenente all'insieme dei numeri naturali.
@@ -50,4 +51,17 @@ bool atomics( int n ) {
             div = div + 2;
     }
     return true;
+}
+
+bool atomics( int n ) {
+
+    if( n == 2 ) {
+            return true;
+    } else if( n % 2 == 0 ) {
+            return false;
+    } else if( n == 1 ) {
+            return false;
+    } else {
+            return primes( n );
+    }
 }

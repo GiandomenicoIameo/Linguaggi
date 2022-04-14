@@ -8,6 +8,6 @@ library = -lm
 $(cc):
 	gcc -c $(options) $(cc).c
 	gcc $(library) $(cc).o -o program.out
-clean:
+clear:
 	rm *.o
 	rm program.out
