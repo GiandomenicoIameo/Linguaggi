@@ -2,7 +2,6 @@
 #include <math.h>
 #include <stdbool.h>
 
-bool primes( int n );
 bool atomics( int n );
 
 bool positive( int n );
@@ -69,6 +68,8 @@ bool primes( int n ) {
 }
 
 bool atomics( int n ) {
+
+    bool primes( int n );
 
     if( n == 2 ) {
             return true;
