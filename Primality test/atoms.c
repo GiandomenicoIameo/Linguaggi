@@ -1,35 +1,15 @@
-#include <stdio.h>
-#include <stdbool.h>
+#include "atoms.h"
 
-bool atomics( int n );
+// La funzione verifica se n è un numero primo
+// appartenente all'insieme dei numeri naturali.
+//
+// La complessità dell'algoritmo in termini di tempo e' : O( 1/2 * sqrt( n ) ).
+// La complessità dell'algoritmo in termini di spazio e' : Θ( 1 ).
 
-int main( void ) {
-
-    int n;
-    do {
-            printf( "Inserisci un numero : " );
-            scanf( "%d", &n );
-    } while( n < 0 );
-
-    if( atomics( n ) ) {
-            puts( "Il numero e' primo" );
-    } else {
-            puts( "Il numero non e' primo" );
-    }
-
-    return 0;
-}
-
-bool primes( int n ) {
+static bool primes( int n ) {
 
     int rest;
     int div = 3;
-
-    // La funzione verifica se n è un numero primo
-    // appartenente all'insieme dei numeri naturali.
-    //
-    // La complessità dell'algoritmo in termini di tempo e' : O( n/6 ).
-    // La complessità dell'algoritmo in termini di spazio e' : Θ( 1 ).
 
     while( div <= n / 3 ) {
             rest = n % div;
@@ -43,8 +23,6 @@ bool primes( int n ) {
 }
 
 bool atomics( int n ) {
-
-    bool primes( int n );
 
     if( n == 2 ) {
             return true;
