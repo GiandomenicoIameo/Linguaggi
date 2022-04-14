@@ -1,6 +1,7 @@
 #include <stdio.h>
+#include <stdbool.h>
 
-int atomics( int n );
+bool atomics( int n );
 
 int main( void ) {
 
@@ -41,12 +42,12 @@ int atomics( int n ) {
     int div = 3;
 
     while( div <= n / 3 ) {
-        rest = n % div;
+            rest = n % div;
 
-        if( !rest ) {
-                return 0;
-        }
-        div = div + 2;
+            if( !rest ) {
+                    return 0;
+            }
+            div = div + 2;
     }
     return 1;
 }
