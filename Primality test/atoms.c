@@ -23,24 +23,14 @@ int main( void ) {
 
 bool primes( int n ) {
 
+    int rest;
+    int div = 3;
+    
     // La funzione verifica se n è un numero primo
     // appartenente all'insieme dei numeri naturali.
     //
     // La complessità dell'algoritmo in termini di tempo e' : O( n/6 ).
     // La complessità dell'algoritmo in termini di spazio e' : Θ( 1 ).
-
-    if( n == 2 ) {
-            return true;
-    }
-    if( n % 2 == 0 ) {
-            return false;
-    }
-    if( n == 1 ) {
-            return false;
-    }
-
-    int rest;
-    int div = 3;
 
     while( div <= n / 3 ) {
             rest = n % div;
