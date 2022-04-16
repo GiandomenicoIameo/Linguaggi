@@ -30,8 +30,7 @@ int main( void ) {
 
 bool primes( int n ) {
 
-    int rest;
-    int div = 3;
+    int rest, div = 3;
 
     while( div <= n / 3 ) {
             rest = n % div;

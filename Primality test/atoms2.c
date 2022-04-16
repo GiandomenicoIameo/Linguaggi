@@ -31,11 +31,8 @@ int main( void ) {
 
 bool primes( int n ) {
 
-    int rest, div;
-    double square;
-
-    div = 3;
-    square = sqrt( n );
+    int rest, div = 3;
+    double square = sqrt( n );
 
     while( div <= square ) {
             rest = n % div;
