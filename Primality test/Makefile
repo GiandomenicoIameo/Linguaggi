@@ -1,6 +1,6 @@
 # Synopsis :
 #       <command declaration> ::= make <target>=<input file>
-#       Esempio : $ make cc=atoms
+#       Example : $ make cc=atoms
 
 options = -ansi -Wall -pedantic -std=c99
 lib = -lm
