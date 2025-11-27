@@ -1,14 +1,12 @@
-# Synopsis :
-#       <command declaration> ::= make <target>=<input file>
-#       Example : $ make cc=atoms
+test.out:	atoms.o test.o
+		gcc atoms.o test.o -o test.out
 
-options = -ansi -Wall -pedantic -std=c99
-lib = -lm
+test.o:		atoms.h test.c
+		gcc -c -pedantic -Wall test.c
 
-$(cc):
-	gcc -c $(options) $(cc).c
-	gcc $(lib) $(cc).o -o program.out
+atoms.o:	atoms.h atoms.c
+		gcc -c -pedantic -Wall atoms.c
 
 clean:
 	rm *.o
-	rm program.out
+	rm *.out
